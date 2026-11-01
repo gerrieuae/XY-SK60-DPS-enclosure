@@ -95,12 +95,13 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | Banana ⏚ (green) | Front | (10, 14) | Ø6 |
 | IEC inlet | Rear | (25, 52) | 48.1 × 28.1 rectangle (`iec_cut_w` × `iec_cut_h`: 47.5 × 27.5 part + 0.3 per side) |
 | Fan screws | Lid | fan centre ±20 | 4 × Ø3.4 |
+| Name | Lid, outside | centred in X, baseline `name_front` = 10 mm behind the front wall | `name_text` = "cREATRON DPS XY-SK60X", Arial Bold, capital height `name_h` = 4.7 mm (about 85 mm wide, 71 % of `enc_w`), recessed `name_depth` = 0.3 mm (one first layer when printed lid-down). Reads correctly from the front |
 
 ### 2.5 Internal mounts
 | Mount | Position | Size |
 |---|---|---|
 | PSU standoffs (4) | `psu_x` ± `psu_hole_dx`/2, `psu_y` ± `psu_hole_dy`/2 = (−27.35, −57.9), (28.35, −57.9), (−27.35, 47.7), (28.35, 47.7) | Ø8 × 5 high (`psu_boss_d`, `standoff_h`), Ø3.5 hole (`psu_boss_hole`) |
-| LM2596 standoffs (2) | On the inner rear wall (Y = `enc_d/2 − wall`), at (`lm_x`, `lm_z`) = (−28, 35.87) and (+`lm_hole_dx`, +`lm_hole_dz`) = (−11, 69.05) | Ø6 × 5 long, Ø2.5 hole (`lm_boss_d`, `lm_boss_h`, `lm_boss_hole`; M3 self-tapping) |
+| LM2596 posts (2) | On the inner rear wall (Y = `enc_d/2 − wall`), at (`lm_x`, `lm_z`) = (−28, 35.87) and (+`lm_hole_dx`, +`lm_hole_dz`) = (−11, 69.05) | Square 6 × 6, 5 long (`lm_boss_w`, `lm_boss_h`), Ø2.5 hole (`lm_boss_hole`; M3 self-tapping). A 45° gusset on the lid side runs 5 mm up the wall, so the posts print without support when the top is printed lid-down (§6) |
 
 ---
 
@@ -207,7 +208,8 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 |---|---|---|
 | Feet | `foot_inset` 10, `foot_hole_d` 4 | Ø`foot_hole_d` at `enc_w/2 − foot_inset`, `enc_d/2 − foot_inset` |
 | PSU standoffs | `psu_x` 0.5, `psu_y` −5.1, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 8, `psu_boss_hole` 3.5 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
-| LM2596 standoffs | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_d` 6, `lm_boss_h` 5, `lm_boss_hole` 2.5 | On the inner face of the rear wall, so they follow `enc_d` |
+| LM2596 posts | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_w` 6, `lm_boss_h` 5, `lm_boss_hole` 2.5 | Square posts with a 45° gusset toward the lid, rooted in the inner face of the rear wall, so they follow `enc_d` |
+| Lid name | `name_text`, `name_h` 4.7, `name_front` 10, `name_depth` 0.3, `name_y` = `−enc_d/2 + name_front` | Centred text on the lid; `name_h` is not scaled with `enc_w`, so re-check the 60 % coverage after a width change |
 | Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `grille_l` = `fan_s − 10`, `grille_n`, `grille_seg` | Grille slots and screw holes follow the fan |
 | Lid vents | `lid_vent_margin` 30, `lid_vent_gap` 4, `lid_vent_front_l` 14, `lid_vent_rear_l` = `vent_len_max`, `lid_vent_n` | Centred fields, `lid_vent_gap` in front of and behind the fan |
 | Floor vents, front | `fv_front_margin` 22, `fv_front_gap` 2, `fv_front_l` 7.5, `fv_front_n` | Centred field just inside the front wall |
@@ -249,3 +251,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-01 | Measured rocker is larger (15 × 21 flange): new `Rocker_Switch_15x21.sc`; width 110 → 120 (`PSU_Enclosure_120x85.sc`); controller and bananas X −2, switch X 44.5, side clips, lip and groove moved out 5 mm |
 | 2026-11-01 | IEC cut-out 48.1 × 28.1. Parametric rework (v3.1): split on a construction plane at `split_z`; lip and groove sketches dimensioned; bosses replaced by expression-placed standoffs; vents, feet, clips, hooks and pockets derived from `enc_w`, `enc_d`, `split_z`, `wall` and the fan (§7.2). Geometry unchanged at the defaults. Pre-rework file kept in `backup/` |
 | 2026-11-01 | Lip and groove rebuilt from two splits and two trims (§2.1) after the lip union failed at widths ≤ 110 and depth 135. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28, wall 2–3, corner 4–7 |
+| 2026-11-01 | LM2596 posts made square with a 45° gusset (printable lid-down without support). Name "cREATRON DPS XY-SK60X" recessed 0.3 mm into the lid, 10 mm from the front, 71 % of the width |
