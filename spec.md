@@ -59,8 +59,9 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 | Split plane | Horizontal at **Z 23**, between the banana row and the display |
 | `Enclosure_Bottom` | Z 0–23, plus a lip to Z 26 and clip arms to Z 33 |
 | `Enclosure_Top` | Z 23–85, including the lid, the front and rear panel cut-outs, and the fan mount |
-| Lip (on the bottom) | 1.2 thick × 3 high, on the inner half of the wall |
-| Groove (in the top) | 0.2 mm clearance around the lip, 3.4 deep |
+| Lip (on the bottom) | 1.2 thick × 3 high (`lip_t`, `lip_h`), on the inner half of the wall |
+| Groove (in the top) | 0.2 mm clearance (`lip_clr`) outside the lip and 0.3 above it, 3.4 deep |
+| Construction | The box is split twice, at `split_z + lip_h` (`Lip_Top_Plane`) and at `split_z` (`Split_Plane`). The 3 mm ring between the planes is trimmed to the lip (`Lip_Trim`) and joined to the bottom; a copy of it is trimmed to the outer wall (`Top_Ring_Trim`) and joined to the top after the groove clearance cut. Every boolean then meets a face exactly or cuts inside material, which rebuilds reliably at any size; the earlier lip-as-added-ring union failed at some sizes |
 | Seam | 0.6 mm chamfer on both outer edges, which forms a neat V-groove |
 
 ### 2.2 Snap clips (6, no screws)
@@ -197,7 +198,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | `ban_z`, `ban_pitch`, `ban_hole_d` | 14, 19, 6 | Banana row |
 | `fan_x`, `fan_y`, `fan_hole_pitch` | 0.5, −2.5, 40 | Fan |
 | `slot_w`, `slot_bridge` | 2, 3 | Vents |
-| `split_z`, `lip_t`, `lip_h`, `lip_clr`, `seam_ch` | 23, 1.2, 3, 0.2, 0.6 | Split plane (a construction plane `Split_Plane` at `split_z`), lip, groove and seam. The lip and groove sketches are dimensioned from `enc_w`, `enc_d`, `wall`, `corner_r`, `lip_t` and `lip_clr` |
+| `split_z`, `lip_t`, `lip_h`, `lip_clr`, `seam_ch` | 23, 1.2, 3, 0.2, 0.6 | Split planes (`Split_Plane` at `split_z`, `Lip_Top_Plane` at `split_z + lip_h`), lip, groove and seam (§2.1). The lip and groove sketches are dimensioned from `enc_w`, `enc_d`, `wall`, `corner_r`, `lip_t` and `lip_clr` |
 | `standoff_h` | 5 | PSU standoff height |
 
 ### 7.2 Derived placement (added 2026-11-01)
@@ -247,3 +248,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-01 | Depth 170 → 150 (controller raised to Z 55), height 80 → 85, rocker aligned with the display, slot bridges (max 20 mm) |
 | 2026-11-01 | Measured rocker is larger (15 × 21 flange): new `Rocker_Switch_15x21.sc`; width 110 → 120 (`PSU_Enclosure_120x85.sc`); controller and bananas X −2, switch X 44.5, side clips, lip and groove moved out 5 mm |
 | 2026-11-01 | IEC cut-out 48.1 × 28.1. Parametric rework (v3.1): split on a construction plane at `split_z`; lip and groove sketches dimensioned; bosses replaced by expression-placed standoffs; vents, feet, clips, hooks and pockets derived from `enc_w`, `enc_d`, `split_z`, `wall` and the fan (§7.2). Geometry unchanged at the defaults. Pre-rework file kept in `backup/` |
+| 2026-11-01 | Lip and groove rebuilt from two splits and two trims (§2.1) after the lip union failed at widths ≤ 110 and depth 135. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28, wall 2–3, corner 4–7 |
