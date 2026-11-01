@@ -3,7 +3,7 @@
 A 3D-printed enclosure for a 36 V / 5 A bench power supply, modelled in SolidCraft.
 Inside: an AC-DC2416 open-frame supply, an XY-SK60 controller with display, a front mains rocker switch, a Schurter C14 inlet with fuse and switch, three 4 mm banana sockets, and a 5 V fan powered by an LM2596HV buck module.
 
-**Size:** 110 × 150 × 85 mm. It prints in two halves that snap together with 6 clips and need no screws.
+**Size:** 120 × 150 × 85 mm. It prints in two halves that snap together with 6 clips and need no screws.
 
 The full design specification is in **[spec.md](spec.md)**: dimensions, positions, wiring, clearances and open items.
 
@@ -11,12 +11,14 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 
 | File | What it is |
 |---|---|
-| `PSU_Enclosure_110x85.sc` | **Main design.** Enclosure plus all components, parametric |
+| `PSU_Enclosure_120x85.sc` | **Main design.** Enclosure plus all components, parametric |
+| `PSU_Enclosure_110x85.sc` | Previous 110-wide version (the larger rocker doesn't fit beside the display) |
 | `Enclosure_Top.3mf`, `Enclosure_Bottom.3mf` | Print-ready halves, exported from the main design |
 | `AC-DC2416.sc` | AC-DC supply model (board, heatsinks, terminals, wiring keep-out spaces) |
 | `XY-SK60.sc` | Controller model (bezel, body, tabs, heatsink, rear connectors) |
 | `C14_Schurter_KM00-1205-11.sc` | IEC inlet, imported from the vendor STEP |
-| `Rocker_Switch.sc` | Mains rocker switch |
+| `Rocker_Switch_15x21.sc` | Mains rocker switch, 15 × 21 flange (used) |
+| `Rocker_Switch.sc` | Smaller rocker switch, first guess (not used) |
 | `Banana_ST351B_Black/Red/Green.sc` | 4 mm banana sockets |
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
 | `PSU_Enclosure.sc` | Older layout v2 (145 × 125 × 90), kept for reference |
@@ -42,7 +44,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 
 ## Editing the design
 
-- **Parameters:** open `PSU_Enclosure_110x85.sc` in SolidCraft. The main parameters (`enc_w`, `enc_d`, `enc_h`, `ctl_z`, `slot_bridge`, …) are listed in [spec.md §7](spec.md#7-parameters-main-ones-in-psu_enclosure_110x85sc).
+- **Parameters:** open `PSU_Enclosure_120x85.sc` in SolidCraft. The main parameters (`enc_w`, `enc_d`, `enc_h`, `ctl_z`, `slot_bridge`, …) are listed in [spec.md §7](spec.md#7-parameters-main-ones-in-psu_enclosure_120x85sc).
 - **Changing the box size:** many feature positions are fixed numbers, so changing only the box size will not move the standoffs, vents or clips.
 
 ## Credits

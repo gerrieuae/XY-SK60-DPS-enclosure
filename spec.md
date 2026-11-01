@@ -3,7 +3,7 @@
 **Project:** 36 V / 5 A benchtop DC power supply in a 3D-printed enclosure
 **Designer:** Gerrie
 **CAD tool:** SolidCraft 0.25.1 (parametric `.sc`)
-**Current design file:** `PSU_Enclosure_110x85.sc`
+**Current design file:** `PSU_Enclosure_120x85.sc`
 **Revision:** v3, 2026-11-01. Replaces the 2026-10-28 spec (165 × 178 × 75 box with banana columns beside the display).
 **Status:** Model complete, split for printing, no interference. A few dimensions still need checking before the first print (see §8).
 
@@ -46,7 +46,7 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 
 | Property | Value |
 |---|---|
-| Outer size (W × D × H) | **110 × 150 × 85 mm**, in 5 mm steps |
+| Outer size (W × D × H) | **120 × 150 × 85 mm**, in 5 mm steps |
 | Wall / lid thickness | 2.5 mm / 2.5 mm (the lid is part of the top half) |
 | Vertical corner radius | 5 mm outside, 2.5 mm inside |
 | Material | PETG, or ASA for more heat margin (heat deflection about 75 °C vs 98 °C) |
@@ -66,7 +66,7 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 ### 2.2 Snap clips (6, no screws)
 | Property | Value |
 |---|---|
-| Positions | Left and right walls at Y −64 and Y +54; front wall at X 43 (behind the rocker); rear wall at X 25 (under the IEC inlet) |
+| Positions | Left and right walls at Y −64 and Y +54; front wall at X 44.5 (behind the rocker); rear wall at X 25 (under the IEC inlet) |
 | Arm | 1.2 × 6 mm, Z 13–33, about 12 mm free to flex, part of the bottom half |
 | Hook | Sticks 0.8 mm into the wall. Ramped top for lead-in; retention face about 70° |
 | Pocket | Blind pocket on the inside of the top's wall, 7 wide, Z 29.3–32.7. Not visible from outside |
@@ -87,11 +87,11 @@ All slots are **2 mm wide** (a 2.5 mm test probe cannot enter). No slot is longe
 ### 2.4 Panel cut-outs
 | Feature | Panel | Centre (X, Z) | Size |
 |---|---|---|---|
-| XY-SK60 controller | Front | (−7, 55) | 81.6 × 40.6 rectangle, plain (press-fit tabs) |
-| Mains rocker switch | Front | (43, 55), height linked to the display (`sw_z = ctl_z`) | 8.0 × 13.2 (**to verify**) |
-| Banana − (black) | Front | (−26, 14) | Ø6 |
-| Banana + (red) | Front | (−7, 14) | Ø6 |
-| Banana ⏚ (green) | Front | (12, 14) | Ø6 |
+| XY-SK60 controller | Front | (−9, 55) | 81.6 × 40.6 rectangle, plain (press-fit tabs) |
+| Mains rocker switch | Front | (44.5, 55), height linked to the display (`sw_z = ctl_z`) | 12.75 × 18.45 (measured) |
+| Banana − (black) | Front | (−28, 14) | Ø6 |
+| Banana + (red) | Front | (−9, 14) | Ø6 |
+| Banana ⏚ (green) | Front | (10, 14) | Ø6 |
 | IEC inlet | Rear | (25, 52) | 47.4 × 28.4 rectangle |
 | Fan screws | Lid | fan centre ±20 | 4 × Ø3.4 |
 
@@ -108,8 +108,8 @@ All slots are **2 mm wide** (a 2.5 mm test probe cannot enter). No slot is longe
 | # | Part | Model file | Position / notes |
 |---|---|---|---|
 | 1 | **AC-DC2416 Rev D**: 36 V 5 A 180 W open-frame supply (Amazon B09CZCHZP7) | `AC-DC2416.sc` | Rotated 90° (long axis front–back); AC terminal at front left, DC terminal at the rear. PCB centre (0.5, −5.1), on 5 mm standoffs |
-| 2 | **XY-SK60** buck controller with display (measured; SK60X size) | `XY-SK60.sc` | Front, centre (−7, 55) |
-| 3 | **Mains rocker switch**, 2-pin | `Rocker_Switch.sc` | Front, right of the display; switches the mains |
+| 2 | **XY-SK60** buck controller with display (measured; SK60X size) | `XY-SK60.sc` | Front, centre (−9, 55) |
+| 3 | **Mains rocker switch**, KCD3 size: 15 × 21 flange, 12.75 × 18.45 cut-out (measured) | `Rocker_Switch_15x21.sc` (the older, smaller `Rocker_Switch.sc` is kept but unused) | Front, right of the display; switches the mains |
 | 4 | **Schurter KM00.1205.11**: C14 inlet with fuse holder and switch | `C14_Schurter_KM00-1205-11.sc` (from the vendor STEP) | Rear right, horizontal, its switch on the right seen from the front |
 | 5 | **ST-351B 4 mm banana sockets** × 3 (black / red / green) | `Banana_ST351B_*.sc` | Front, under the display, 19 mm pitch |
 | 6 | **Pelonis C5010H05BPLP1b-7** fan: 50 × 50 × 10, 5 V, 0.27 A, 13.6 CFM | from `oldTry/DC5010_7.stp` | Under the lid, centre (0.5, −2.5), blowing upward, over the transformer |
@@ -165,6 +165,7 @@ No parts overlap. The tightest spots:
 | Controller wiring space ↔ PSU transformer | 1.9 mm |
 | Controller case ↔ inner lid | 7.5 mm |
 | Bezel top ↔ top edge of the case | 7.5 mm |
+| Front panel, left → right | 8 mm edge · 86 mm bezel · 3 mm gap · 15 mm switch flange · 8 mm edge (3 mm to each corner radius) |
 
 ---
 
@@ -180,14 +181,14 @@ No parts overlap. The tightest spots:
 
 ---
 
-## 7. Parameters (main ones in `PSU_Enclosure_110x85.sc`)
+## 7. Parameters (main ones in `PSU_Enclosure_120x85.sc`)
 
 | Name | Value | Meaning |
 |---|---|---|
-| `enc_w` / `enc_d` / `enc_h` | 110 / 150 / 85 | Outer size |
+| `enc_w` / `enc_d` / `enc_h` | 120 / 150 / 85 | Outer size |
 | `wall`, `lid_t`, `corner_r` | 2.5, 2.5, 5 | Shell |
-| `ctl_x`, `ctl_z` | −7, 55 | Controller centre |
-| `sw_x`, `sw_z` | 43, = `ctl_z` | Rocker centre |
+| `ctl_x`, `ctl_z` | −9, 55 | Controller centre (the banana cut-outs follow `ctl_x`) |
+| `sw_x`, `sw_z`, `sw_cut_w`, `sw_cut_l` | 44.5, = `ctl_z`, 12.75, 18.45 | Rocker centre and cut-out |
 | `iec_x`, `iec_z` | 25, 52 | IEC inlet centre |
 | `ban_z`, `ban_pitch`, `ban_hole_d` | 14, 19, 6 | Banana row |
 | `fan_x`, `fan_y`, `fan_hole_pitch` | 0.5, −2.5, 40 | Fan |
@@ -202,7 +203,7 @@ No parts overlap. The tightest spots:
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Measure the rocker switch flange and body; confirm the 8.0 × 13.2 cut-out (the listing's 15 × 9 doesn't match its own drawing) | ⏳ |
+| 1 | Rocker switch: flange 15 × 21 and cut-out 12.75 × 18.45 measured ✅. Body depth (18), flange thickness (2) and terminals are still estimates | ⏳ |
 | 2 | Schurter snap tabs sit 1.4–3.4 mm behind the flange; check that they lock on a 2.5 mm wall | ⏳ |
 | 3 | The banana lug sits partly inside the wall in the model; check on the real part | ⏳ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
@@ -221,3 +222,4 @@ No parts overlap. The tightest spots:
 | 2026-10-31 | Layout v3: 110 × 170 × 80; PSU rotated, bananas under the display, IEC at the rear right, front mains rocker, fan, LM2596HV |
 | 2026-10-31 | Split into top and bottom with a lip, seam chamfer and 6 clips |
 | 2026-11-01 | Depth 170 → 150 (controller raised to Z 55), height 80 → 85, rocker aligned with the display, slot bridges (max 20 mm) |
+| 2026-11-01 | Measured rocker is larger (15 × 21 flange): new `Rocker_Switch_15x21.sc`; width 110 → 120 (`PSU_Enclosure_120x85.sc`); controller and bananas X −2, switch X 44.5, side clips, lip and groove moved out 5 mm |
