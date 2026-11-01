@@ -210,7 +210,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `grille_l` = `fan_s − 10`, `grille_n`, `grille_seg` | Grille slots and screw holes follow the fan |
 | Lid vents | `lid_vent_margin` 30, `lid_vent_gap` 4, `lid_vent_front_l` 14, `lid_vent_rear_l` = `vent_len_max`, `lid_vent_n` | Centred fields, `lid_vent_gap` in front of and behind the fan |
 | Floor vents, front | `fv_front_margin` 22, `fv_front_gap` 2, `fv_front_l` 7.5, `fv_front_n` | Centred field just inside the front wall |
-| Floor vents, sides | `fv_side_in` 11, `fv_side_n` 4, `fv_side_rear_margin` 27.5, `fv_right_front_margin` 22.5, `fv_left_front_margin` 47.5, `fv_right_l`, `fv_left_l`, `fv_right_seg`, `fv_left_seg` | Runs along the side walls, split into ≤ `vent_len_max` segments |
+| Floor vents, sides | `fv_side_in` 11, `fv_side_clear` 2, `fv_right_n`, `fv_left_n`, `fv_side_rear_margin` 27.5, `fv_right_front_margin` 22.5, `fv_left_front_margin` 47.5, `fv_right_l`, `fv_left_l`, `fv_right_seg`, `fv_left_seg` | Runs along the side walls, split into ≤ `vent_len_max` segments. The slot count per side is what fits between the outer wall and the PSU standoff plus `fv_side_clear` (4 per side at 120 wide, 3 at 110, 2 at 100) |
 | Vents, common | `vent_pitch` 4, `vent_len_max` 20, `slot_w` 2, `slot_bridge` 3 | |
 | Snap clips | `clip_w` 6, `clip_arm_t` 1.2, `clip_arm_h` 20, `clip_root_h` 8, `clip_z0` = `split_z − 10`, `clip_hook` 0.8, `clip_hook_z` = `split_z + 6.1`, `clip_pocket_w` 7, `clip_pocket_z` = `split_z + 6.3`, `clip_pocket_h` 3.4, `clip_y_front` = `−(enc_d/2 − 11)`, `clip_y_rear` = `enc_d/2 − 21`, `clip_x_front` = `sw_x`, `clip_x_rear` = `iec_x` | All six clips, their hooks and pockets sit on the inner wall faces and follow the split |
 
@@ -218,7 +218,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 
 - The **imported components** (AC-DC2416, XY-SK60, rocker, IEC inlet, bananas, fan, LM2596) are placed by fixed transforms; SolidCraft occurrences take no expressions. After changing `enc_d`, move the front-panel parts by the change in `enc_d/2` (−Y) and the IEC inlet and LM2596 by +Δ`enc_d/2`; after changing `enc_h`, check `ctl_z`, `iec_z` and `sw_z`. Their **cut-outs** do follow the parameters (`ctl_x`, `ctl_z`, `sw_x`, `iec_x`, `iec_z`, `ban_z`).
 - Panel heights (`ctl_z` 55, `iec_z` 52, `ban_z` 14, `split_z` 23) are measured from the floor and are not scaled with `enc_h`.
-- Check clearances after a change: a smaller `enc_d` brings the floor vents, feet and clips closer to the standoffs and keep-outs. `inspect.parameter_sweep` rebuilds a copy of the design for a list of values and reports failures.
+- Check clearances after a change: a smaller `enc_d` brings the floor vents, feet and clips closer to the standoffs and keep-outs. Below about 105 mm wide the rocker cut-out (`sw_x` 44.5) and the controller cut-out (`ctl_x` −9, 81.6 wide) reach the side walls, so move `sw_x` and `ctl_x` first. `inspect.parameter_sweep` rebuilds a copy of the design for a list of values and reports failures; a full rebuild takes about 90 s.
 
 ---
 
