@@ -21,9 +21,9 @@ FRONT (seen from the front)                 REAR (seen from the back)
 │ │  81.6 × 40.6 cutout    │ mains │        │  │(inside)  │ inlet+fuse+sw│     │
 │ └────────────────────────┘ rocker│        │  └─────┘    └──────────────┘     │
 │ ──────── seam (Z 23) ──────────  │        │ ──────── seam (Z 23) ──────────  │
-│      ⊙ −      ⊙ +      ⊙ ⏚       │        │                                  │
+│      ⊙ −      ⊙ ⏚      ⊙ +       │        │                                  │
 └──────────────────────────────────┘        └──────────────────────────────────┘
-        black    red     green
+        black   green     red     (NEG / EARTH / POS labels above the seam)
 
 TOP VIEW (front at the bottom)
 ┌──────────────────────────────────┐  rear wall: IEC inlet (right), LM2596 (left, inside)
@@ -91,8 +91,10 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | XY-SK60 controller | Front | (−9, 55) | 81.6 × 40.6 rectangle, plain (press-fit tabs) |
 | Mains rocker switch | Front | (44.5, 55), height linked to the display (`sw_z = ctl_z`) | 12.75 × 18.45 (measured) |
 | Banana − (black) | Front | (−28, 14) | Ø6 |
-| Banana + (red) | Front | (−9, 14) | Ø6 |
-| Banana ⏚ (green) | Front | (10, 14) | Ø6 |
+| Banana ⏚ (green) | Front | (−9, 14) | Ø6 |
+| Banana + (red) | Front | (10, 14) | Ø6 |
+| Socket labels | Front, top half | NEG, EARTH, POS centred over the sockets, baseline `label_z` = 26 (above the seam chamfer, below the display bezel at Z 32.5) | Arial Bold, capital height `name_h` = 4.7, recessed `name_depth` = 0.3 (`label_neg`, `label_earth`, `label_pos`) |
+| Rocker label | Front, top half | MAINS centred over the rocker, baseline `mains_z` = `sw_z + 13` = 68 (above the 15 × 21 bezel, which ends at Z 65.5) | as the socket labels (`label_mains`) |
 | IEC inlet | Rear | (25, 52) | 48.1 × 28.1 rectangle (`iec_cut_w` × `iec_cut_h`: 47.5 × 27.5 part + 0.3 per side) |
 | Fan screws | Lid | fan centre ±20 | 4 × Ø3.4 |
 | Name | Lid, outside | centred in X, baseline `name_front` = 10 mm behind the front wall | `name_text` = "cREATRON DPS XY-SK60X", Arial Bold, capital height `name_h` = 4.7 mm (about 85 mm wide, 71 % of `enc_w`), recessed `name_depth` = 0.3 mm (one first layer when printed lid-down). Reads correctly from the front |
@@ -113,7 +115,7 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | 2 | **XY-SK60** buck controller with display (measured; SK60X size) | `XY-SK60.sc` | Front, centre (−9, 55) |
 | 3 | **Mains rocker switch**, KCD3 size: 15 × 21 flange, 12.75 × 18.45 cut-out (measured) | `Rocker_Switch_15x21.sc` (the older, smaller `Rocker_Switch.sc` is kept but unused) | Front, right of the display; switches the mains |
 | 4 | **Schurter KM00.1205.11**: C14 inlet with fuse holder and switch | `C14_Schurter_KM00-1205-11.sc` (from the vendor STEP) | Rear right, horizontal, its switch on the right seen from the front |
-| 5 | **ST-351B 4 mm banana sockets** × 3 (black / red / green) | `Banana_ST351B_*.sc` | Front, under the display, 19 mm pitch |
+| 5 | **ST-351B 4 mm banana sockets** × 3 (black / green / red, left to right) | `Banana_ST351B_*.sc` | Front, under the display, 19 mm pitch |
 | 6 | **Pelonis C5010H05BPLP1b-7** fan: 50 × 50 × 10, 5 V, 0.27 A, 13.6 CFM | from `oldTry/DC5010_7.stp` | Under the lid, centre (0.5, −2.5), blowing upward, over the transformer |
 | 7 | **LM2596HV buck module** (for the fan's 5 V) | from `oldTry/LM2596_DC-DC_CONVERTER.STEP` | Rear wall inside, left of the IEC inlet, vertical; input at the bottom, output at the top |
 
@@ -210,6 +212,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | PSU standoffs | `psu_x` 0.5, `psu_y` −5.1, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 8, `psu_boss_hole` 3.5 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
 | LM2596 posts | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_w` 6, `lm_boss_h` 5, `lm_boss_hole` 2.5 | Square posts with a 45° gusset toward the lid, rooted in the inner face of the rear wall, so they follow `enc_d` |
 | Lid name | `name_text`, `name_h` 4.7, `name_front` 10, `name_depth` 0.3, `name_y` = `−enc_d/2 + name_front` | Centred text on the lid; `name_h` is not scaled with `enc_w`, so re-check the 60 % coverage after a width change |
+| Front labels | `label_neg`, `label_earth`, `label_pos`, `label_mains` (texts), `label_z` 26, `mains_z` = `sw_z + 13` | Same height and depth as the lid name; the socket labels follow `ctl_x` and `ban_pitch`, MAINS follows `sw_x` and `sw_z` |
 | Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `grille_l` = `fan_s − 10`, `grille_n`, `grille_seg` | Grille slots and screw holes follow the fan |
 | Lid vents | `lid_vent_margin` 30, `lid_vent_gap` 4, `lid_vent_front_l` 14, `lid_vent_rear_l` = `vent_len_max`, `lid_vent_n` | Centred fields, `lid_vent_gap` in front of and behind the fan |
 | Floor vents, front | `fv_front_margin` 22, `fv_front_gap` 2, `fv_front_l` 7.5, `fv_front_n` | Centred field just inside the front wall |
@@ -252,3 +255,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-01 | IEC cut-out 48.1 × 28.1. Parametric rework (v3.1): split on a construction plane at `split_z`; lip and groove sketches dimensioned; bosses replaced by expression-placed standoffs; vents, feet, clips, hooks and pockets derived from `enc_w`, `enc_d`, `split_z`, `wall` and the fan (§7.2). Geometry unchanged at the defaults. Pre-rework file kept in `backup/` |
 | 2026-11-01 | Lip and groove rebuilt from two splits and two trims (§2.1) after the lip union failed at widths ≤ 110 and depth 135. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28, wall 2–3, corner 4–7 |
 | 2026-11-01 | LM2596 posts made square with a 45° gusset (printable lid-down without support). Name "cREATRON DPS XY-SK60X" recessed 0.3 mm into the lid, 10 mm from the front, 71 % of the width |
+| 2026-11-01 | Red and green sockets swapped (black, green, red). NEG / EARTH / POS labels above the seam over the sockets and MAINS above the rocker, recessed 0.3 mm into the front of the top half |
