@@ -45,7 +45,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 ## Editing the design
 
 - **Parameters:** open `PSU_Enclosure_120x85.sc` in SolidCraft. The main parameters (`enc_w`, `enc_d`, `enc_h`, `ctl_z`, `slot_bridge`, …) are listed in [spec.md §7](spec.md#7-parameters-main-ones-in-psu_enclosure_120x85sc).
-- **Changing the box size:** many feature positions are fixed numbers, so changing only the box size will not move the standoffs, vents or clips.
+- **Changing the box size:** change `enc_w`, `enc_d`, `enc_h` (and `split_z`, `wall`, `corner_r` if needed). The shell, lip, groove, seam, clips, vents, feet and standoffs follow. The imported components (PSU, controller, rocker, IEC inlet, bananas, fan, LM2596) are placed by fixed transforms, so move them to the new walls by hand afterwards (see [spec.md §7](spec.md#7-parameters-psu_enclosure_120x85sc)).
 
 ## Credits
 

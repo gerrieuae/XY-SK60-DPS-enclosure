@@ -4,7 +4,7 @@
 **Designer:** Gerrie
 **CAD tool:** SolidCraft 0.25.1 (parametric `.sc`)
 **Current design file:** `PSU_Enclosure_120x85.sc`
-**Revision:** v3, 2026-11-01. Replaces the 2026-10-28 spec (165 × 178 × 75 box with banana columns beside the display).
+**Revision:** v3.1, 2026-11-01. Parametric rework of v3 (same geometry at 120 × 150 × 85). Replaces the 2026-10-28 spec (165 × 178 × 75 box with banana columns beside the display).
 **Status:** Model complete, split for printing, no interference. A few dimensions still need checking before the first print (see §8).
 
 ---
@@ -66,14 +66,14 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 ### 2.2 Snap clips (6, no screws)
 | Property | Value |
 |---|---|
-| Positions | Left and right walls at Y −64 and Y +54; front wall at X 44.5 (behind the rocker); rear wall at X 25 (under the IEC inlet) |
-| Arm | 1.2 × 6 mm, Z 13–33, about 12 mm free to flex, part of the bottom half |
-| Hook | Sticks 0.8 mm into the wall. Ramped top for lead-in; retention face about 70° |
-| Pocket | Blind pocket on the inside of the top's wall, 7 wide, Z 29.3–32.7. Not visible from outside |
+| Positions | Left and right walls at Y −64 and Y +54 (`clip_y_front = −(enc_d/2 − 11)`, `clip_y_rear = enc_d/2 − 21`); front wall at X 44.5 (`clip_x_front = sw_x`, behind the rocker); rear wall at X 25 (`clip_x_rear = iec_x`, under the IEC inlet) |
+| Arm | `clip_arm_t` × `clip_w` = 1.2 × 6 mm, from `clip_z0 = split_z − 10` up 20 (`clip_arm_h`), about 12 mm free to flex, part of the bottom half |
+| Hook | Sticks 0.8 mm (`clip_hook`) into the wall from `clip_hook_z = split_z + 6.1`. Ramped top for lead-in; retention face about 70° |
+| Pocket | Blind pocket on the inside of the top's wall, `clip_pocket_w` = 7 wide, from `clip_pocket_z = split_z + 6.3`, 3.4 high (`clip_pocket_h`). Not visible from outside |
 | Release | Pull firmly, or press the arm through a vent slot |
 
 ### 2.3 Ventilation (floor in → lid out, fan assisted)
-All slots are **2 mm wide** (a 2.5 mm test probe cannot enter). No slot is longer than **20 mm**; longer runs are split by **3 mm bridges** (parameter `slot_bridge`).
+All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 mm pitch (`vent_pitch`). No slot is longer than **20 mm** (`vent_len_max`); longer runs are split by **3 mm bridges** (`slot_bridge`). The slot counts follow the box: the lid and front floor fields are centred and get `floor((enc_w − 2·margin)/vent_pitch) + 1` slots, the side floor runs span `enc_d` minus their front and rear margins and are cut into `ceil(run / vent_len_max)` segments. The fan grille and the lid vent fields are placed from the fan (`fan_x`, `fan_y`, `fan_s`). The table below is at 120 × 150 × 85.
 
 | Group | Where | Slots |
 |---|---|---|
@@ -92,14 +92,14 @@ All slots are **2 mm wide** (a 2.5 mm test probe cannot enter). No slot is longe
 | Banana − (black) | Front | (−28, 14) | Ø6 |
 | Banana + (red) | Front | (−9, 14) | Ø6 |
 | Banana ⏚ (green) | Front | (10, 14) | Ø6 |
-| IEC inlet | Rear | (25, 52) | 47.4 × 28.4 rectangle |
+| IEC inlet | Rear | (25, 52) | 48.1 × 28.1 rectangle (`iec_cut_w` × `iec_cut_h`: 47.5 × 27.5 part + 0.3 per side) |
 | Fan screws | Lid | fan centre ±20 | 4 × Ø3.4 |
 
 ### 2.5 Internal mounts
 | Mount | Position | Size |
 |---|---|---|
-| PSU standoffs (4) | (−27.35, −57.9), (28.35, −57.9), (−27.35, 47.7), (28.35, 47.7) | Ø8 × 5 high, Ø3.5 hole |
-| LM2596 standoffs (2) | Rear wall inside, at (X −28, Z 35.87) and (X −11, Z 69.05) | Ø6 × 5 long, Ø2.5 hole (M3 self-tapping) |
+| PSU standoffs (4) | `psu_x` ± `psu_hole_dx`/2, `psu_y` ± `psu_hole_dy`/2 = (−27.35, −57.9), (28.35, −57.9), (−27.35, 47.7), (28.35, 47.7) | Ø8 × 5 high (`psu_boss_d`, `standoff_h`), Ø3.5 hole (`psu_boss_hole`) |
+| LM2596 standoffs (2) | On the inner rear wall (Y = `enc_d/2 − wall`), at (`lm_x`, `lm_z`) = (−28, 35.87) and (+`lm_hole_dx`, +`lm_hole_dz`) = (−11, 69.05) | Ø6 × 5 long, Ø2.5 hole (`lm_boss_d`, `lm_boss_h`, `lm_boss_hole`; M3 self-tapping) |
 
 ---
 
@@ -181,11 +181,15 @@ No parts overlap. The tightest spots:
 
 ---
 
-## 7. Parameters (main ones in `PSU_Enclosure_120x85.sc`)
+## 7. Parameters (`PSU_Enclosure_120x85.sc`)
+
+The enclosure is driven by the parameters below (SolidCraft → Parameters). The values shown are the defaults, which reproduce the 120 × 150 × 85 design exactly.
+
+### 7.1 Size and shell
 
 | Name | Value | Meaning |
 |---|---|---|
-| `enc_w` / `enc_d` / `enc_h` | 120 / 150 / 85 | Outer size |
+| `enc_w` / `enc_d` / `enc_h` | 120 / 150 / 85 | Outer size. Everything in §7.2 follows these |
 | `wall`, `lid_t`, `corner_r` | 2.5, 2.5, 5 | Shell |
 | `ctl_x`, `ctl_z` | −9, 55 | Controller centre (the banana cut-outs follow `ctl_x`) |
 | `sw_x`, `sw_z`, `sw_cut_w`, `sw_cut_l` | 44.5, = `ctl_z`, 12.75, 18.45 | Rocker centre and cut-out |
@@ -193,9 +197,28 @@ No parts overlap. The tightest spots:
 | `ban_z`, `ban_pitch`, `ban_hole_d` | 14, 19, 6 | Banana row |
 | `fan_x`, `fan_y`, `fan_hole_pitch` | 0.5, −2.5, 40 | Fan |
 | `slot_w`, `slot_bridge` | 2, 3 | Vents |
-| `split_z`, `lip_t`, `lip_h`, `lip_clr`, `seam_ch` | 23, 1.2, 3, 0.2, 0.6 | Split |
+| `split_z`, `lip_t`, `lip_h`, `lip_clr`, `seam_ch` | 23, 1.2, 3, 0.2, 0.6 | Split plane (a construction plane `Split_Plane` at `split_z`), lip, groove and seam. The lip and groove sketches are dimensioned from `enc_w`, `enc_d`, `wall`, `corner_r`, `lip_t` and `lip_clr` |
+| `standoff_h` | 5 | PSU standoff height |
 
-> Many feature positions (standoffs, vents, clips, the lip sketch) are fixed numbers, not linked to `enc_d` or `enc_w`. Changing the box size alone will not move them. Check those features after a size change.
+### 7.2 Derived placement (added 2026-11-01)
+
+| Group | Parameters | Rule |
+|---|---|---|
+| Feet | `foot_inset` 10, `foot_hole_d` 4 | Ø`foot_hole_d` at `enc_w/2 − foot_inset`, `enc_d/2 − foot_inset` |
+| PSU standoffs | `psu_x` 0.5, `psu_y` −5.1, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 8, `psu_boss_hole` 3.5 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
+| LM2596 standoffs | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_d` 6, `lm_boss_h` 5, `lm_boss_hole` 2.5 | On the inner face of the rear wall, so they follow `enc_d` |
+| Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `grille_l` = `fan_s − 10`, `grille_n`, `grille_seg` | Grille slots and screw holes follow the fan |
+| Lid vents | `lid_vent_margin` 30, `lid_vent_gap` 4, `lid_vent_front_l` 14, `lid_vent_rear_l` = `vent_len_max`, `lid_vent_n` | Centred fields, `lid_vent_gap` in front of and behind the fan |
+| Floor vents, front | `fv_front_margin` 22, `fv_front_gap` 2, `fv_front_l` 7.5, `fv_front_n` | Centred field just inside the front wall |
+| Floor vents, sides | `fv_side_in` 11, `fv_side_n` 4, `fv_side_rear_margin` 27.5, `fv_right_front_margin` 22.5, `fv_left_front_margin` 47.5, `fv_right_l`, `fv_left_l`, `fv_right_seg`, `fv_left_seg` | Runs along the side walls, split into ≤ `vent_len_max` segments |
+| Vents, common | `vent_pitch` 4, `vent_len_max` 20, `slot_w` 2, `slot_bridge` 3 | |
+| Snap clips | `clip_w` 6, `clip_arm_t` 1.2, `clip_arm_h` 20, `clip_root_h` 8, `clip_z0` = `split_z − 10`, `clip_hook` 0.8, `clip_hook_z` = `split_z + 6.1`, `clip_pocket_w` 7, `clip_pocket_z` = `split_z + 6.3`, `clip_pocket_h` 3.4, `clip_y_front` = `−(enc_d/2 − 11)`, `clip_y_rear` = `enc_d/2 − 21`, `clip_x_front` = `sw_x`, `clip_x_rear` = `iec_x` | All six clips, their hooks and pockets sit on the inner wall faces and follow the split |
+
+### 7.3 What does **not** follow a size change
+
+- The **imported components** (AC-DC2416, XY-SK60, rocker, IEC inlet, bananas, fan, LM2596) are placed by fixed transforms; SolidCraft occurrences take no expressions. After changing `enc_d`, move the front-panel parts by the change in `enc_d/2` (−Y) and the IEC inlet and LM2596 by +Δ`enc_d/2`; after changing `enc_h`, check `ctl_z`, `iec_z` and `sw_z`. Their **cut-outs** do follow the parameters (`ctl_x`, `ctl_z`, `sw_x`, `iec_x`, `iec_z`, `ban_z`).
+- Panel heights (`ctl_z` 55, `iec_z` 52, `ban_z` 14, `split_z` 23) are measured from the floor and are not scaled with `enc_h`.
+- Check clearances after a change: a smaller `enc_d` brings the floor vents, feet and clips closer to the standoffs and keep-outs. `inspect.parameter_sweep` rebuilds a copy of the design for a list of values and reports failures.
 
 ---
 
@@ -223,3 +246,4 @@ No parts overlap. The tightest spots:
 | 2026-10-31 | Split into top and bottom with a lip, seam chamfer and 6 clips |
 | 2026-11-01 | Depth 170 → 150 (controller raised to Z 55), height 80 → 85, rocker aligned with the display, slot bridges (max 20 mm) |
 | 2026-11-01 | Measured rocker is larger (15 × 21 flange): new `Rocker_Switch_15x21.sc`; width 110 → 120 (`PSU_Enclosure_120x85.sc`); controller and bananas X −2, switch X 44.5, side clips, lip and groove moved out 5 mm |
+| 2026-11-01 | IEC cut-out 48.1 × 28.1. Parametric rework (v3.1): split on a construction plane at `split_z`; lip and groove sketches dimensioned; bosses replaced by expression-placed standoffs; vents, feet, clips, hooks and pockets derived from `enc_w`, `enc_d`, `split_z`, `wall` and the fan (§7.2). Geometry unchanged at the defaults. Pre-rework file kept in `backup/` |
