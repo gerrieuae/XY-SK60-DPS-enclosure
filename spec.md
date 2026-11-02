@@ -93,7 +93,7 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | Banana − (black) | Front | (−25, 14) = (`ban_x − ban_pitch`, `ban_z`) | Ø6 |
 | Banana ⏚ (green) | Front | (0, 14) = (`ban_x`, `ban_z`) | Ø6 |
 | Banana + (red) | Front | (25, 14) = (`ban_x + ban_pitch`, `ban_z`) | Ø6 |
-| Socket labels | Front, top half | NEG, EARTH, POS centred over the sockets, baseline `label_z` = 26 (above the seam chamfer, below the display bezel at Z 32.5) | Arial Bold, capital height `name_h` = 4.7, recessed `name_depth` = 0.3 (`label_neg`, `label_earth`, `label_pos`) |
+| Socket labels | Front, top half | NEG, EARTH, POS centred over the sockets, baseline `label_z` = 26 (above the seam chamfer, below the display bezel at Z 32.5) | Arial Bold, capital height `label_h` = 0.8 × `name_h` = 3.76, recessed `name_depth` = 0.3 (`label_neg`, `label_earth`, `label_pos`) |
 | Rocker label | Front, top half | MAINS centred over the rocker, baseline `mains_z` = `sw_z + 13` = 68 (above the 15 × 21 bezel, which ends at Z 65.5) | as the socket labels (`label_mains`) |
 | IEC inlet | Rear | (25, 52) | 48.1 × 28.1 rectangle (`iec_cut_w` × `iec_cut_h`: 47.5 × 27.5 part + 0.3 per side) |
 | Fan screws | Lid | fan centre ±20 | 4 × Ø3.4 |
@@ -212,7 +212,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | PSU standoffs | `psu_x` 0.5, `psu_y` −5.1, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 8, `psu_boss_hole` 3.5 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
 | LM2596 posts | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_w` 6, `lm_boss_h` 5, `lm_boss_hole` 2.5 | Square posts with a 45° gusset toward the lid, rooted in the inner face of the rear wall, so they follow `enc_d` |
 | Lid name | `name_text`, `name_h` 4.7, `name_front` 10, `name_depth` 0.3, `name_y` = `−enc_d/2 + name_front` | Centred text on the lid; `name_h` is not scaled with `enc_w`, so re-check the 60 % coverage after a width change |
-| Front labels | `label_neg`, `label_earth`, `label_pos`, `label_mains` (texts), `label_z` 26, `mains_z` = `sw_z + 13` | Same height and depth as the lid name; the socket labels follow `ban_x` and `ban_pitch`, MAINS follows `sw_x` and `sw_z` |
+| Front labels | `label_neg`, `label_earth`, `label_pos`, `label_mains` (texts), `label_z` 26, `mains_z` = `sw_z + 13`, `label_h` = `name_h * 0.8` | 80 % of the lid name's height, same depth; the socket labels follow `ban_x` and `ban_pitch`, MAINS follows `sw_x` and `sw_z` |
 | Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `grille_l` = `fan_s − 10`, `grille_n`, `grille_seg` | Grille slots and screw holes follow the fan |
 | Lid vents | `lid_vent_margin` 30, `lid_vent_gap` 4, `lid_vent_front_l` 14, `lid_vent_rear_l` = `vent_len_max`, `lid_vent_n` | Centred fields, `lid_vent_gap` in front of and behind the fan |
 | Floor vents, front | `fv_front_margin` 22, `fv_front_gap` 2, `fv_front_l` 7.5, `fv_front_n` | Centred field just inside the front wall |
@@ -259,3 +259,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-01 | Socket row centred on the box (`ban_x` 0) at 25 mm pitch (was 19 mm about the display centre), so the labels read clearly |
 | 2026-11-02 | Rocker switch from the KCD1-101 datasheet (`Rocker_Switch_KCD1-101.sc`); cut-out 19.2 × 13 (was 12.75 × 18.45 measured) |
 | 2026-11-02 | Lip and seam built from a copy and oversize box cuts instead of two splits and two joins (§2.1): the Split1/Split2 "Boolean retry" warnings are gone, seam exactly at Z 23. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28 |
+| 2026-11-02 | Front labels (NEG / EARTH / POS / MAINS) scaled to 80 %: new `label_h` = `name_h * 0.8` (3.76 mm); the lid name keeps `name_h` |
