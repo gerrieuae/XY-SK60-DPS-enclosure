@@ -89,7 +89,7 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | Feature | Panel | Centre (X, Z) | Size |
 |---|---|---|---|
 | XY-SK60 controller | Front | (−9, 55) | 81.6 × 40.6 rectangle, plain (press-fit tabs) |
-| Mains rocker switch | Front | (44.5, 55), height linked to the display (`sw_z = ctl_z`) | 12.75 × 18.45 (measured) |
+| Mains rocker switch | Front | (44.5, 55), height linked to the display (`sw_z = ctl_z`) | 19.2 × 13 (KCD1-101 datasheet) |
 | Banana − (black) | Front | (−25, 14) = (`ban_x − ban_pitch`, `ban_z`) | Ø6 |
 | Banana ⏚ (green) | Front | (0, 14) = (`ban_x`, `ban_z`) | Ø6 |
 | Banana + (red) | Front | (25, 14) = (`ban_x + ban_pitch`, `ban_z`) | Ø6 |
@@ -113,7 +113,7 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 |---|---|---|---|
 | 1 | **AC-DC2416 Rev D**: 36 V 5 A 180 W open-frame supply (Amazon B09CZCHZP7) | `AC-DC2416.sc` | Rotated 90° (long axis front–back); AC terminal at front left, DC terminal at the rear. PCB centre (0.5, −5.1), on 5 mm standoffs |
 | 2 | **XY-SK60** buck controller with display (measured; SK60X size) | `XY-SK60.sc` | Front, centre (−9, 55) |
-| 3 | **Mains rocker switch**, KCD3 size: 15 × 21 flange, 12.75 × 18.45 cut-out (measured) | `Rocker_Switch_15x21.sc` (the older, smaller `Rocker_Switch.sc` is kept but unused) | Front, right of the display; switches the mains |
+| 3 | **Mains rocker switch** KCD1-101: 15 × 21 flange, 12.9 × 18.8 × 13.2 body, 19.2 × 13 cut-out (datasheet) | `Rocker_Switch_KCD1-101.sc` (`Rocker_Switch_15x21.sc` and the older `Rocker_Switch.sc` are kept but unused) | Front, right of the display; switches the mains |
 | 4 | **Schurter KM00.1205.11**: C14 inlet with fuse holder and switch | `C14_Schurter_KM00-1205-11.sc` (from the vendor STEP) | Rear right, horizontal, its switch on the right seen from the front |
 | 5 | **ST-351B 4 mm banana sockets** × 3 (black / green / red, left to right) | `Banana_ST351B_*.sc` | Front, under the display, row centred on the box (`ban_x` = 0), 25 mm pitch (`ban_pitch`) so the labels have room |
 | 6 | **Pelonis C5010H05BPLP1b-7** fan: 50 × 50 × 10, 5 V, 0.27 A, 13.6 CFM | from `oldTry/DC5010_7.stp` | Under the lid, centre (0.5, −2.5), blowing upward, over the transformer |
@@ -196,7 +196,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | `enc_w` / `enc_d` / `enc_h` | 120 / 150 / 85 | Outer size. Everything in §7.2 follows these |
 | `wall`, `lid_t`, `corner_r` | 2.5, 2.5, 5 | Shell |
 | `ctl_x`, `ctl_z` | −9, 55 | Controller centre (the banana cut-outs follow `ctl_x`) |
-| `sw_x`, `sw_z`, `sw_cut_w`, `sw_cut_l` | 44.5, = `ctl_z`, 12.75, 18.45 | Rocker centre and cut-out |
+| `sw_x`, `sw_z`, `sw_cut_w`, `sw_cut_l` | 44.5, = `ctl_z`, 13, 19.2 (KCD1-101 datasheet; add 0.1–0.2 if the printed hole is tight) | Rocker centre and cut-out |
 | `iec_x`, `iec_z` | 25, 52 | IEC inlet centre |
 | `ban_x`, `ban_z`, `ban_pitch`, `ban_hole_d` | 0, 14, 25, 6 | Banana row: centre X, height, spacing (the socket cut-outs and the NEG / EARTH / POS labels follow; move the socket components by hand after a change) |
 | `fan_x`, `fan_y`, `fan_hole_pitch` | 0.5, −2.5, 40 | Fan |
@@ -232,7 +232,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Rocker switch: flange 15 × 21 and cut-out 12.75 × 18.45 measured ✅. Body depth (18), flange thickness (2) and terminals are still estimates | ⏳ |
+| 1 | Rocker switch: modelled from the KCD1-101 datasheet (cut-out 19.2 × 13, body 13.2 deep, 7.5 mm tabs). Flange thickness (2), rocker width (11) and clips are estimates; widen the hole 0.1–0.2 mm if a test print is tight | ✅ |
 | 2 | Schurter snap tabs sit 1.4–3.4 mm behind the flange; check that they lock on a 2.5 mm wall | ⏳ |
 | 3 | The banana lug sits partly inside the wall in the model; check on the real part | ⏳ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
@@ -257,3 +257,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-01 | LM2596 posts made square with a 45° gusset (printable lid-down without support). Name "cREATRON DPS XY-SK60X" recessed 0.3 mm into the lid, 10 mm from the front, 71 % of the width |
 | 2026-11-01 | Red and green sockets swapped (black, green, red). NEG / EARTH / POS labels above the seam over the sockets and MAINS above the rocker, recessed 0.3 mm into the front of the top half |
 | 2026-11-01 | Socket row centred on the box (`ban_x` 0) at 25 mm pitch (was 19 mm about the display centre), so the labels read clearly |
+| 2026-11-02 | Rocker switch from the KCD1-101 datasheet (`Rocker_Switch_KCD1-101.sc`); cut-out 19.2 × 13 (was 12.75 × 18.45 measured) |

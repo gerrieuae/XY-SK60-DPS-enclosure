@@ -17,7 +17,8 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `AC-DC2416.sc` | AC-DC supply model (board, heatsinks, terminals, wiring keep-out spaces) |
 | `XY-SK60.sc` | Controller model (bezel, body, tabs, heatsink, rear connectors) |
 | `C14_Schurter_KM00-1205-11.sc` | IEC inlet, imported from the vendor STEP |
-| `Rocker_Switch_15x21.sc` | Mains rocker switch, 15 × 21 flange (used) |
+| `Rocker_Switch_KCD1-101.sc` | Mains rocker switch KCD1-101, from the datasheet (used) |
+| `Rocker_Switch_15x21.sc` | Rocker switch modelled from measurements, 15 × 21 flange (not used) |
 | `Rocker_Switch.sc` | Smaller rocker switch, first guess (not used) |
 | `Banana_ST351B_Black/Red/Green.sc` | 4 mm banana sockets |
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
