@@ -234,7 +234,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 |---|---|---|
 | 1 | Rocker switch: modelled from the KCD1-101 datasheet (cut-out 19.2 × 13, body 13.2 deep, 7.5 mm tabs). Flange thickness (2), rocker width (11) and clips are estimates; widen the hole 0.1–0.2 mm if a test print is tight | ✅ |
 | 2 | Schurter snap tabs sit 1.4–3.4 mm behind the flange; check that they lock on a 2.5 mm wall | ⏳ |
-| 3 | The banana lug sits partly inside the wall in the model; check on the real part | ⏳ |
+| 3 | Banana socket models moved 2.5 mm back (Y −74.7 → −72.2, 2026-11-02) because the real part's plastic sits that much deeper; the model now overlaps the front wall, which is accepted | ✅ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
 | 5 | Print a test clip; tune the hook and arm for PETG or ASA | ⏳ |
 | 6 | Use the XY-SK60 temperature probe (on the PSU heatsink?) and its fan output | ⏳ |
@@ -260,3 +260,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-02 | Rocker switch from the KCD1-101 datasheet (`Rocker_Switch_KCD1-101.sc`); cut-out 19.2 × 13 (was 12.75 × 18.45 measured) |
 | 2026-11-02 | Lip and seam built from a copy and oversize box cuts instead of two splits and two joins (§2.1): the Split1/Split2 "Boolean retry" warnings are gone, seam exactly at Z 23. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28 |
 | 2026-11-02 | Front labels (NEG / EARTH / POS / MAINS) scaled to 80 %: new `label_h` = `name_h * 0.8` (3.76 mm); the lid name keeps `name_h` |
+| 2026-11-02 | Banana socket models moved 2.5 mm back (Y −72.2) to match the real parts; wall overlap in the model accepted |
