@@ -61,7 +61,7 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 | `Enclosure_Top` | Z 23–85, including the lid, the front and rear panel cut-outs, and the fan mount |
 | Lip (on the bottom) | 1.2 thick × 3 high (`lip_t`, `lip_h`), on the inner half of the wall |
 | Groove (in the top) | 0.2 mm clearance (`lip_clr`) outside the lip and 0.3 above it, 3.4 deep |
-| Construction | The box is split twice, at `split_z + lip_h` (`Lip_Top_Plane`) and at `split_z` (`Split_Plane`). The 3 mm ring between the planes is trimmed to the lip (`Lip_Trim`) and joined to the bottom; a copy of it is trimmed to the outer wall (`Top_Ring_Trim`) and joined to the top after the groove clearance cut. Every boolean then meets a face exactly or cuts inside material, which rebuilds reliably at any size; the earlier lip-as-added-ring union failed at some sizes |
+| Construction | No split or join features. `Copy_Bottom` copies the finished box; `Bottom_Cut_Above` (an oversize box) removes everything above `split_z + lip_h`, and `Bottom_Outer_Trim` (thin extrude of `Sk_Lip`, from `split_z` up) removes the outer half of the wall above `split_z`, which leaves the lip. On the original, `Top_Cut_Below` removes everything below `split_z` and `Groove` cuts the lip clearance. Every tool face lies far outside the body or inside material, so no boolean has coplanar faces; this rebuilds without warnings and the seam lies exactly at Z 23 (the earlier two-split version nudged the split tool by 4 µm / 2 µrad and warned). `Split_Plane` and `Lip_Top_Plane` are kept for reference only |
 | Seam | 0.6 mm chamfer on both outer edges, which forms a neat V-groove |
 
 ### 2.2 Snap clips (6, no screws)
@@ -258,3 +258,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-01 | Red and green sockets swapped (black, green, red). NEG / EARTH / POS labels above the seam over the sockets and MAINS above the rocker, recessed 0.3 mm into the front of the top half |
 | 2026-11-01 | Socket row centred on the box (`ban_x` 0) at 25 mm pitch (was 19 mm about the display centre), so the labels read clearly |
 | 2026-11-02 | Rocker switch from the KCD1-101 datasheet (`Rocker_Switch_KCD1-101.sc`); cut-out 19.2 × 13 (was 12.75 × 18.45 measured) |
+| 2026-11-02 | Lip and seam built from a copy and oversize box cuts instead of two splits and two joins (§2.1): the Split1/Split2 "Boolean retry" warnings are gone, seam exactly at Z 23. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28 |
