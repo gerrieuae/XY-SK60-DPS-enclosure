@@ -33,6 +33,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `Enclosure_Bottom.3mf` | Upright, so the clip arms print vertically and can flex |
 | `Enclosure_Top.3mf` | Upside down, lid on the bed |
 
+- **Test the clips first:** print `clipTest_Bottom.3mf` and `clipTest_Top.3mf` (a 40 × 50 × 28 box with the same lip, seam and 6 clips) in the same orientations. If the clips are too stiff or too loose, adjust `clip_hook`, `clip_arm_t` or the `clip_pocket_*` values in `clipTest.sc`, reprint, then copy the values into the main design. See [spec.md §2.3a](spec.md#23a-clip-test-box-cliptestsc).
 - **Material:** PETG, or ASA for more heat margin.
 - **Settings:** 2.5 mm walls; no supports needed.
 

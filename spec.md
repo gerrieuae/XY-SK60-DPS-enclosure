@@ -73,6 +73,18 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 | Pocket | Blind pocket on the inside of the top's wall, `clip_pocket_w` = 7 wide, from `clip_pocket_z = split_z + 6.3`, 3.4 high (`clip_pocket_h`). Not visible from outside |
 | Release | Pull firmly, or press the arm through a vent slot |
 
+### 2.3a Clip test box (`clipTest.sc`)
+
+A small box to print before the full enclosure, to tune the clips for the filament. It is built from the same features as the main design (shell, `Copy_Bottom` / box cuts, lip, groove, seam chamfer and all 6 clips), with the components, cut-outs, vents, posts and labels left out.
+
+| Property | Value |
+|---|---|
+| Size | 40 × 50 × 28 (`enc_w`, `enc_d`, `enc_h`) |
+| Split | Z 13 (`split_z`), so `clip_z0` = 3 sits just above the 2.5 mm floor |
+| Clips | Same arm, root, hook and pocket as §2.2; front and rear clips centred (`clip_x_front` = `clip_x_rear` = 0), side pairs at Y −14 and +4 |
+| Files | `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` (printed like the main halves, §6) |
+| Tuning | Change `clip_hook`, `clip_arm_t` or `clip_pocket_*` in `clipTest.sc`, reprint, then copy the values that work into `PSU_Enclosure_120x85.sc` |
+
 ### 2.3 Ventilation (floor in → lid out, fan assisted)
 All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 mm pitch (`vent_pitch`). No slot is longer than **20 mm** (`vent_len_max`); longer runs are split by **3 mm bridges** (`slot_bridge`). The slot counts follow the box: the lid and front floor fields are centred and get `floor((enc_w − 2·margin)/vent_pitch) + 1` slots, the side floor runs span `enc_d` minus their front and rear margins and are cut into `ceil(run / vent_len_max)` segments. The fan grille and the lid vent fields are placed from the fan (`fan_x`, `fan_y`, `fan_s`). The table below is at 120 × 150 × 85.
 
@@ -180,7 +192,7 @@ No parts overlap. The tightest spots:
 | `Enclosure_Bottom.3mf` | Upright (floor on the bed) | The clip arms then print vertically, along the layer direction, so they can flex |
 | `Enclosure_Top.3mf` | Upside down (lid on the bed) | The panel cut-outs bridge cleanly |
 
-- Print one clip as a test piece first. Tune the hook depth (0.8) or the arm thickness (1.2) for your filament.
+- Print the clip test box (`clipTest_Top.3mf`, `clipTest_Bottom.3mf`, §2.3a) first, oriented as above. Tune the hook depth (0.8) or the arm thickness (1.2) for your filament.
 - For long use near full load, ASA is the safer material.
 
 ---
@@ -236,7 +248,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2 | Schurter snap tabs sit 1.4–3.4 mm behind the flange; check that they lock on a 2.5 mm wall | ⏳ |
 | 3 | Banana socket models moved 2.5 mm back (Y −74.7 → −72.2, 2026-11-02) because the real part's plastic sits that much deeper; the model now overlaps the front wall, which is accepted | ✅ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
-| 5 | Print a test clip; tune the hook and arm for PETG or ASA | ⏳ |
+| 5 | Print the clip test box (`clipTest.sc`, §2.3a); tune the hook and arm for PETG or ASA | ⏳ |
 | 6 | Use the XY-SK60 temperature probe (on the PSU heatsink?) and its fan output | ⏳ |
 | 7 | Layout, size, split, clips, vents, fan and fan supply | ✅ |
 
@@ -261,3 +273,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-02 | Lip and seam built from a copy and oversize box cuts instead of two splits and two joins (§2.1): the Split1/Split2 "Boolean retry" warnings are gone, seam exactly at Z 23. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28 |
 | 2026-11-02 | Front labels (NEG / EARTH / POS / MAINS) scaled to 80 %: new `label_h` = `name_h * 0.8` (3.76 mm); the lid name keeps `name_h` |
 | 2026-11-02 | Banana socket models moved 2.5 mm back (Y −72.2) to match the real parts; wall overlap in the model accepted |
+| 2026-11-05 | Clip test box `clipTest.sc` (40 × 50 × 28, split Z 13) with the main design's lip, seam and 6 clips, plus its two 3MF halves |
