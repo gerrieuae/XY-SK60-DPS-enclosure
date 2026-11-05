@@ -127,7 +127,7 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | 2 | **XY-SK60** buck controller with display (measured; SK60X size) | `XY-SK60.sc` | Front, centre (−9, 55) |
 | 3 | **Mains rocker switch** KCD1-101: 15 × 21 flange, 12.9 × 18.8 × 13.2 body, 19.2 × 13 cut-out (datasheet) | `Rocker_Switch_KCD1-101.sc` (`Rocker_Switch_15x21.sc` and the older `Rocker_Switch.sc` are kept but unused) | Front, right of the display; switches the mains |
 | 4 | **Schurter KM00.1205.11**: C14 inlet with fuse holder and switch | `C14_Schurter_KM00-1205-11.sc` (from the vendor STEP) | Rear right, horizontal, its switch on the right seen from the front |
-| 5 | **ST-351B 4 mm banana sockets** × 3 (black / green / red, left to right) | `Banana_ST351B_*.sc` | Front, under the display, row centred on the box (`ban_x` = 0), 25 mm pitch (`ban_pitch`) so the labels have room |
+| 5 | **ST-351B 4 mm banana sockets** × 3 (black / green / red, left to right). Own model: front cap Ø11.3 × 2.5 with a Ø6 nozzle through the panel, rear piece Ø11.3 × 4.4 (Ø6 bore) behind the panel, metal with Ø7 collar, Ø5.2 thread and solder lug | `Banana_4mm_Black/Red/Green.sc` (the vendor-STEP `Banana_ST351B_*.sc` are kept but unused: their metal body is an open shell) | Front, under the display, row centred on the box (`ban_x` = 0), 25 mm pitch (`ban_pitch`) so the labels have room |
 | 6 | **Pelonis C5010H05BPLP1b-7** fan: 50 × 50 × 10, 5 V, 0.27 A, 13.6 CFM | from `oldTry/DC5010_7.stp` | Under the lid, centre (0.5, −2.5), blowing upward, over the transformer |
 | 7 | **LM2596HV buck module** (for the fan's 5 V) | from `oldTry/LM2596_DC-DC_CONVERTER.STEP` | Rear wall inside, left of the IEC inlet, vertical; input at the bottom, output at the top |
 
@@ -246,7 +246,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 |---|---|---|
 | 1 | Rocker switch: modelled from the KCD1-101 datasheet (cut-out 19.2 × 13, body 13.2 deep, 7.5 mm tabs). Flange thickness (2), rocker width (11) and clips are estimates; widen the hole 0.1–0.2 mm if a test print is tight | ✅ |
 | 2 | Schurter snap tabs sit 1.4–3.4 mm behind the flange; check that they lock on a 2.5 mm wall | ⏳ |
-| 3 | Banana socket models moved 2.5 mm back (Y −74.7 → −72.2, 2026-11-02) because the real part's plastic sits that much deeper; the model now overlaps the front wall, which is accepted | ✅ |
+| 3 | Banana sockets: own model (`Banana_4mm_*.sc`, 2026-11-05) with the two plastic pieces either side of the 2.5 mm wall, origin on the outer face (Y −75); no overlap with the wall, no import warnings. Panel hole Ø6 is the minimum (the nozzle is Ø6) | ✅ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
 | 5 | Print the clip test box (`clipTest.sc`, §2.3a); tune the hook and arm for PETG or ASA | ⏳ |
 | 6 | Use the XY-SK60 temperature probe (on the PSU heatsink?) and its fan output | ⏳ |
@@ -274,3 +274,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-02 | Front labels (NEG / EARTH / POS / MAINS) scaled to 80 %: new `label_h` = `name_h * 0.8` (3.76 mm); the lid name keeps `name_h` |
 | 2026-11-02 | Banana socket models moved 2.5 mm back (Y −72.2) to match the real parts; wall overlap in the model accepted |
 | 2026-11-05 | Clip test box `clipTest.sc` (40 × 50 × 28, split Z 13) with the main design's lip, seam and 6 clips, plus its two 3MF halves |
+| 2026-11-05 | Own banana socket model `Banana_4mm_*.sc` replaces the vendor STEP (open metal shell): front cap in front of the panel, Ø6 nozzle through the Ø6 hole, rear piece behind; the design now rebuilds without any warnings |
