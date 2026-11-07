@@ -7,7 +7,6 @@ PSU_Enclosure_110x80*.sc
 PSU_Enclosure2.sc
 *copy.sc
 PSU_Enclosure_120x85_backup*.sc
-backup/oldTry/.~*.lock
 
 # Claude Code local settings
 .claude/
