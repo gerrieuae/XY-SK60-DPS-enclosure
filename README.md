@@ -12,6 +12,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | File | What it is |
 |---|---|
 | `PSU_Enclosure_120x85.sc` | **Main design.** Enclosure plus all components, parametric |
+| `parameters.csv` | Parameter table exported from the main design (name, unit, expression, value, comment) |
 | `Enclosure_Top.3mf`, `Enclosure_Bottom.3mf` | Print-ready halves, exported from the main design |
 | `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` | 40 × 50 × 28 test box with the same wall, lip, seam and 6 snap clips as the main design (split at Z 13); print it to tune the clips first |
 | `AC-DC2416.sc` | AC-DC supply model (board, heatsinks, terminals, wiring keep-out spaces) |

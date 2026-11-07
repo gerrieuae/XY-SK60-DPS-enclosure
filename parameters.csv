@@ -1,0 +1,103 @@
+name,unit,expression,value,comment,favorite
+enc_w,mm,120 mm,120,Outer width (5 mm steps),false
+enc_d,mm,150 mm,150,Outer depth (5 mm steps),false
+enc_h,mm,85 mm,85,Outer height incl. lid (5 mm steps),false
+wall,mm,2.5 mm,2.5,Wall / panel thickness,false
+lid_t,mm,2.5 mm,2.5,Lid thickness,false
+corner_r,mm,5 mm,5,Outer vertical corner radius,false
+standoff_h,mm,5 mm,5,PSU standoff height,false
+ctl_x,mm,-9 mm,-9,Controller centre X,false
+ctl_z,mm,55.0 mm,55,Controller centre Z,false
+ctl_cut_w,mm,81.6 mm,81.6,Controller cutout W,false
+ctl_cut_h,mm,40.6 mm,40.6,Controller cutout H,false
+sw_x,mm,44.5 mm,44.5,Mains rocker switch centre X (right of display),false
+sw_z,mm,ctl_z,55,Mains rocker switch centre Z (aligned with display centre),false
+sw_cut_w,mm,13 mm,13,Rocker cutout W (KCD1-101 datasheet 19.2 x 13),false
+sw_cut_l,mm,19.2 mm,19.2,Rocker cutout H (KCD1-101 datasheet 19.2 x 13),false
+iec_x,mm,25 mm,25,IEC inlet centre X (rear right),false
+iec_z,mm,52 mm,52,IEC inlet centre Z,false
+iec_cut_w,mm,48.1 mm,48.1,IEC cutout W,false
+iec_cut_h,mm,28.1 mm,28.1,IEC cutout H,false
+ban_z,mm,14 mm,14,Banana row centre Z,false
+ban_pitch,mm,25 mm,25,Banana spacing; leaves room for the NEG / EARTH / POS labels,false
+ban_hole_d,mm,6 mm,6,Banana panel hole,false
+fan_x,mm,0.5 mm,0.5,Fan centre X (over transformer),false
+fan_y,mm,-2.5 mm,-2.5,Fan centre Y,false
+fan_s,mm,50 mm,50,Fan size,false
+fan_t,mm,10 mm,10,Fan thickness,false
+fan_hole_pitch,mm,40 mm,40,Fan screw spacing,false
+slot_w,mm,2 mm,2,Vent slot width,false
+split_z,mm,23 mm,23,Horizontal split between bananas and display,false
+lip_t,mm,1.2 mm,1.2,Lip thickness (inner half of wall),false
+lip_h,mm,3 mm,3,Lip height above split,false
+lip_clr,mm,0.2 mm,0.2,Lip/groove clearance,false
+seam_ch,mm,0.6 mm,0.6,Outer seam chamfer (V-groove),false
+slot_bridge,mm,3 mm,3,Bridge between vent slot segments (slots max 20 long),false
+vent_pitch,mm,4 mm,4,Vent slot pitch (centre to centre),false
+vent_len_max,mm,20 mm,20,Longest vent slot; longer runs are split by slot_bridge,false
+lid_vent_margin,mm,30 mm,30,Lid vent fields: X margin from the outer wall,false
+lid_vent_gap,mm,4 mm,4,Gap between the fan and the lid vent fields (Y),false
+lid_vent_front_l,mm,14 mm,14,Front lid vent slot length (Y),false
+lid_vent_rear_l,mm,vent_len_max,20,Rear lid vent slot length (Y),false
+lid_vent_n,,floor((enc_w - 2*lid_vent_margin) / vent_pitch) + 1,16,Lid vent slots per field (follows enc_w),false
+grille_l,mm,fan_s - 10 mm,40,"Fan grille run (Y), split by slot_bridge",false
+grille_n,,floor((fan_s - 18 mm) / vent_pitch) + 1,9,Fan grille slots (follows fan_s),false
+grille_seg,,ceil(grille_l / vent_len_max),2,Fan grille segments per slot,false
+fv_front_margin,mm,22 mm,22,Front floor vents: X margin from the outer wall,false
+fv_front_l,mm,7.5 mm,7.5,Front floor vent slot length (Y),false
+fv_front_gap,mm,2 mm,2,Front floor vents: gap from the inner front wall,false
+fv_front_n,,floor((enc_w - 2*fv_front_margin) / vent_pitch) + 1,20,Front floor vent slots (follows enc_w),false
+fv_side_in,mm,11 mm,11,Side floor vents: outermost slot centre from the outer wall,false
+fv_right_n,,"max(1, floor((enc_w/2 - fv_side_in - (psu_x + psu_hole_dx/2 + psu_boss_d/2 + fv_side_clear)) / vent_pitch) + 1)",4,Right floor vents: slots that fit between the outer wall and the PSU standoff (follows enc_w),false
+fv_side_rear_margin,mm,27.5 mm,27.5,Side floor vents: end this far from the outer rear wall,false
+fv_right_front_margin,mm,22.5 mm,22.5,Right floor vents: start this far from the outer front wall,false
+fv_left_front_margin,mm,47.5 mm,47.5,Left floor vents: start this far from the outer front wall (clears the AC terminal),false
+fv_right_l,mm,enc_d - fv_right_front_margin - fv_side_rear_margin,100,Right floor vent run (Y),false
+fv_left_l,mm,enc_d - fv_left_front_margin - fv_side_rear_margin,75,Left floor vent run (Y),false
+fv_right_seg,,ceil(fv_right_l / vent_len_max),5,Right floor vent segments,false
+fv_left_seg,,ceil(fv_left_l / vent_len_max),4,Left floor vent segments,false
+foot_inset,mm,10 mm,10,Foot holes: inset from each outer corner,false
+foot_hole_d,mm,4 mm,4,Foot hole diameter,false
+fan_screw_d,mm,3.4 mm,3.4,Fan screw hole diameter,false
+psu_x,mm,0.5 mm,0.5,PSU PCB centre X (move the AC-DC2416 component to match),false
+psu_y,mm,-5.1 mm,-5.1,PSU PCB centre Y (move the AC-DC2416 component to match),false
+psu_hole_dx,mm,55.7 mm,55.7,PSU mounting hole pitch X,false
+psu_hole_dy,mm,105.6 mm,105.6,PSU mounting hole pitch Y,false
+psu_boss_d,mm,8 mm,8,PSU standoff diameter,false
+psu_boss_hole,mm,3.5 mm,3.5,PSU standoff hole (M3 self-tapping),false
+lm_x,mm,-28 mm,-28,LM2596 lower standoff X (rear wall inside),false
+lm_z,mm,35.87 mm,35.87,LM2596 lower standoff Z,false
+lm_hole_dx,mm,17 mm,17,LM2596 hole pitch X,false
+lm_hole_dz,mm,33.18 mm,33.18,LM2596 hole pitch Z,false
+lm_boss_w,mm,6 mm,6,LM2596 post width (square section),false
+lm_boss_h,mm,5 mm,5,LM2596 post length from the wall; the 45° gusset is as long again along the wall,false
+lm_boss_hole,mm,2.5 mm,2.5,LM2596 standoff hole,false
+clip_w,mm,6 mm,6,Snap clip arm width,false
+clip_arm_t,mm,1.2 mm,1.2,Snap clip arm thickness,false
+clip_arm_h,mm,20 mm,20,Snap clip arm height (from clip_z0),false
+clip_root_h,mm,8 mm,8,Snap clip root height (bonded to the wall),false
+clip_z0,mm,split_z - 10 mm,13,Snap clip arm bottom Z,false
+clip_hook,mm,0.8 mm,0.8,Hook depth into the top's wall,false
+clip_hook_z,mm,split_z + 6.1 mm,29.1,Hook bottom Z (retention face),false
+clip_pocket_w,mm,7 mm,7,Hook pocket width in the top's wall,false
+clip_pocket_z,mm,split_z + 6.3 mm,29.3,Hook pocket bottom Z,false
+clip_pocket_h,mm,3.4 mm,3.4,Hook pocket height,false
+clip_y_front,mm,-(enc_d/2 - 11 mm),-64,Side clips: front pair Y centre,false
+clip_y_rear,mm,enc_d/2 - 21 mm,54,Side clips: rear pair Y centre,false
+clip_x_front,mm,sw_x,44.5,Front wall clip X centre (behind the rocker),false
+clip_x_rear,mm,iec_x,25,Rear wall clip X centre (under the IEC inlet),false
+fv_side_clear,mm,2 mm,2,Side floor vents: clearance to the PSU standoffs,false
+fv_left_n,,"max(1, floor((enc_w/2 - fv_side_in + (psu_x - psu_hole_dx/2 - psu_boss_d/2 - fv_side_clear)) / vent_pitch) + 1)",4,Left floor vents: slots that fit between the outer wall and the PSU standoff (follows enc_w),false
+name_h,mm,4.7 mm,4.7,Name capital height (set so the text covers > 60 % of enc_w),false
+name_front,mm,10 mm,10,Name baseline from the front outer wall,false
+name_depth,mm,0.3 mm,0.3,Name recess depth (one first layer when printed lid-down),false
+name_y,mm,-(enc_d/2) + name_front,-65,Name baseline Y,false
+label_z,mm,26 mm,26,"Socket labels baseline Z (above the seam, below the display bezel)",false
+mains_z,mm,sw_z + 13 mm,68,MAINS baseline Z (above the rocker bezel),false
+ban_x,mm,0 mm,0,Banana row centre X (0 = centred on the box),false
+label_h,mm,name_h * 0.8,3.7600000000000002,Front panel label capital height (80 % of the lid name),false
+name_text,text,cREATRON DPS XY-SK60X,,Name debossed into the lid,false
+label_neg,text,NEG,,Label above the black (negative) socket,false
+label_earth,text,EARTH,,Label above the green (earth) socket,false
+label_pos,text,POS,,Label above the red (positive) socket,false
+label_mains,text,MAINS,,Label at the rocker switch,false
