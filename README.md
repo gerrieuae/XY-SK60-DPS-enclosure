@@ -22,7 +22,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `Rocker_Switch_15x21.sc` | Rocker switch modelled from measurements, 15 × 21 flange (not used) |
 | `Rocker_Switch.sc` | Smaller rocker switch, first guess (not used) |
 | `Banana_4mm_Black/Red/Green.sc` | 4 mm banana sockets (ST-351B), own parametric model with the plastic split either side of the panel (used) |
-| `Banana_ST351B_Black/Red/Green.sc` | Same sockets from the vendor STEP (not used: open metal shell) |
+| `backup/Banana_ST351B_Black/Red/Green.sc` | Same sockets from the vendor STEP (not used: open metal shell) |
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
 | `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `oldTry/IEC-C14_*.stp`); not used |
 | `PSU_Enclosure.sc` | Older layout v2 (145 × 125 × 90), kept for reference |
