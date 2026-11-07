@@ -3,8 +3,6 @@
 *.bak
 
 # Local working copies and backups (git history replaces these)
-PSU_Enclosure_110x80*.sc
-PSU_Enclosure2.sc
 *copy.sc
 PSU_Enclosure_120x85_backup*.sc
 

@@ -264,7 +264,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-10-31 | Split into top and bottom with a lip, seam chamfer and 6 clips |
 | 2026-11-01 | Depth 170 → 150 (controller raised to Z 55), height 80 → 85, rocker aligned with the display, slot bridges (max 20 mm) |
 | 2026-11-01 | Measured rocker is larger (15 × 21 flange): new `Rocker_Switch_15x21.sc`; width 110 → 120 (`PSU_Enclosure_120x85.sc`); controller and bananas X −2, switch X 44.5, side clips, lip and groove moved out 5 mm |
-| 2026-11-01 | IEC cut-out 48.1 × 28.1. Parametric rework (v3.1): split on a construction plane at `split_z`; lip and groove sketches dimensioned; bosses replaced by expression-placed standoffs; vents, feet, clips, hooks and pockets derived from `enc_w`, `enc_d`, `split_z`, `wall` and the fan (§7.2). Geometry unchanged at the defaults. Pre-rework file kept in `backup/` |
+| 2026-11-01 | IEC cut-out 48.1 × 28.1. Parametric rework (v3.1): split on a construction plane at `split_z`; lip and groove sketches dimensioned; bosses replaced by expression-placed standoffs; vents, feet, clips, hooks and pockets derived from `enc_w`, `enc_d`, `split_z`, `wall` and the fan (§7.2). Geometry unchanged at the defaults. Pre-rework file is in git history (commit 9850312) |
 | 2026-11-01 | Lip and groove rebuilt from two splits and two trims (§2.1) after the lip union failed at widths ≤ 110 and depth 135. Rebuilds verified at W 100–140, D 120–180, H 70–110, split 20–28, wall 2–3, corner 4–7 |
 | 2026-11-01 | LM2596 posts made square with a 45° gusset (printable lid-down without support). Name "cREATRON DPS XY-SK60X" recessed 0.3 mm into the lid, 10 mm from the front, 71 % of the width |
 | 2026-11-01 | Red and green sockets swapped (black, green, red). NEG / EARTH / POS labels above the seam over the sockets and MAINS above the rocker, recessed 0.3 mm into the front of the top half |
@@ -275,3 +275,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-02 | Banana socket models moved 2.5 mm back (Y −72.2) to match the real parts; wall overlap in the model accepted |
 | 2026-11-05 | Clip test box `clipTest.sc` (40 × 50 × 28, split Z 13) with the main design's lip, seam and 6 clips, plus its two 3MF halves |
 | 2026-11-05 | Own banana socket model `Banana_4mm_*.sc` replaces the vendor STEP (open metal shell): front cap in front of the panel, Ø6 nozzle through the Ø6 hole, rear piece behind; the design now rebuilds without any warnings |
+| 2026-11-07 | Project moved to `DPS_XY-SK60X/`. Vendor STEP sources in `stepFiles/`; unused models removed (vendor-STEP banana sockets, `oldTry/`, layout v2, 110 × 85, pre-parametric copy; all in git history). Two early designs kept in `backup/` |

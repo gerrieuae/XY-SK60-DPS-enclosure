@@ -12,7 +12,6 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | File | What it is |
 |---|---|
 | `PSU_Enclosure_120x85.sc` | **Main design.** Enclosure plus all components, parametric |
-| `PSU_Enclosure_110x85.sc` | Previous 110-wide version (the larger rocker doesn't fit beside the display) |
 | `Enclosure_Top.3mf`, `Enclosure_Bottom.3mf` | Print-ready halves, exported from the main design |
 | `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` | 40 × 50 × 28 test box with the same wall, lip, seam and 6 snap clips as the main design (split at Z 13); print it to tune the clips first |
 | `AC-DC2416.sc` | AC-DC supply model (board, heatsinks, terminals, wiring keep-out spaces) |
@@ -24,7 +23,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `Banana_4mm_Black/Red/Green.sc` | 4 mm banana sockets (ST-351B), own parametric model with the plastic split either side of the panel (used) |
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
 | `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `stepFiles/IEC-C14_*.stp`); not used |
-| `PSU_Enclosure.sc` | Older layout v2 (145 × 125 × 90), kept for reference |
+| `backup/PSU_Enclosure2.sc`, `backup/PSU_Enclosure_110x80.sc` | Two early designs kept for history (not used). Other old versions (layout v2, 110 × 85, pre-parametric 120 × 85) are only in git history |
 | `stepFiles/` | Vendor STEP sources (fan, LM2596, IEC C14 inlets, banana socket); already embedded in the `.sc` files, kept for re-import |
 
 ## Printing
