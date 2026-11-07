@@ -27,7 +27,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `stepFiles/IEC-C14_*.stp`); not used |
 | `PSU_Enclosure.sc` | Older layout v2 (145 × 125 × 90), kept for reference |
 | `stepFiles/` | Vendor STEP sources (fan, LM2596, IEC C14 inlets, banana socket); already embedded in the `.sc` files, kept for re-import |
-| `oldTry/` | Fan datasheet values and the first scripted attempt (`try1.sc`); not used |
+| `backup/oldTry/` | Fan datasheet values and the first scripted attempt (`try1.sc`); not used |
 
 ## Printing
 
