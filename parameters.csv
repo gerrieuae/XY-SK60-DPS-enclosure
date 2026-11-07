@@ -20,7 +20,7 @@ iec_cut_w,mm,48.1 mm,48.1,IEC cutout W,false
 iec_cut_h,mm,28.1 mm,28.1,IEC cutout H,false
 ban_z,mm,14 mm,14,Banana row centre Z,false
 ban_pitch,mm,25 mm,25,Banana spacing; leaves room for the NEG / EARTH / POS labels,false
-ban_hole_d,mm,6 mm,6,Banana panel hole,false
+ban_hole_d,mm,8 mm,8,Banana panel hole (nozzle measured 7.5),false
 fan_x,mm,0.5 mm,0.5,Fan centre X (over transformer),false
 fan_y,mm,-2.5 mm,-2.5,Fan centre Y,false
 fan_s,mm,50 mm,50,Fan size,false
@@ -40,7 +40,7 @@ lid_vent_gap,mm,4 mm,4,Gap between the fan and the lid vent fields (Y),false
 lid_vent_front_l,mm,14 mm,14,Front lid vent slot length (Y),false
 lid_vent_rear_l,mm,vent_len_max,20,Rear lid vent slot length (Y),false
 lid_vent_n,,floor((enc_w - 2*lid_vent_margin) / vent_pitch) + 1,16,Lid vent slots per field (follows enc_w),false
-grille_l,mm,fan_s - 10 mm,40,"Fan grille run (Y), split by slot_bridge",false
+grille_l,mm,fan_s - 10 mm,40,"Fan grille: longest slot run (Y), split by slot_bridge",false
 grille_n,,floor((fan_s - 18 mm) / vent_pitch) + 1,9,Fan grille slots (follows fan_s),false
 grille_seg,,ceil(grille_l / vent_len_max),2,Fan grille segments per slot,false
 fv_front_margin,mm,22 mm,22,Front floor vents: X margin from the outer wall,false
@@ -60,18 +60,18 @@ foot_inset,mm,10 mm,10,Foot holes: inset from each outer corner,false
 foot_hole_d,mm,4 mm,4,Foot hole diameter,false
 fan_screw_d,mm,3.4 mm,3.4,Fan screw hole diameter,false
 psu_x,mm,0.5 mm,0.5,PSU PCB centre X (move the AC-DC2416 component to match),false
-psu_y,mm,-5.1 mm,-5.1,PSU PCB centre Y (move the AC-DC2416 component to match),false
+psu_y,mm,7.9 mm,7.9,PSU PCB centre Y (move the AC-DC2416 component to match),false
 psu_hole_dx,mm,55.7 mm,55.7,PSU mounting hole pitch X,false
 psu_hole_dy,mm,105.6 mm,105.6,PSU mounting hole pitch Y,false
-psu_boss_d,mm,8 mm,8,PSU standoff diameter,false
-psu_boss_hole,mm,3.5 mm,3.5,PSU standoff hole (M3 self-tapping),false
+psu_boss_d,mm,9 mm,9,PSU standoff diameter,false
+psu_boss_hole,mm,4 mm,4,PSU standoff hole for M3 heat-set insert (5 OD x 4 long),false
 lm_x,mm,-28 mm,-28,LM2596 lower standoff X (rear wall inside),false
 lm_z,mm,35.87 mm,35.87,LM2596 lower standoff Z,false
 lm_hole_dx,mm,17 mm,17,LM2596 hole pitch X,false
 lm_hole_dz,mm,33.18 mm,33.18,LM2596 hole pitch Z,false
-lm_boss_w,mm,6 mm,6,LM2596 post width (square section),false
+lm_boss_w,mm,9 mm,9,"LM2596 post width (square section, 2.5 mm wall round the insert)",false
 lm_boss_h,mm,5 mm,5,LM2596 post length from the wall; the 45° gusset is as long again along the wall,false
-lm_boss_hole,mm,2.5 mm,2.5,LM2596 standoff hole,false
+lm_boss_hole,mm,4 mm,4,"LM2596 post hole for M3 heat-set insert (5 OD x 4 long), 5 deep",false
 clip_w,mm,6 mm,6,Snap clip arm width,false
 clip_arm_t,mm,1.2 mm,1.2,Snap clip arm thickness,false
 clip_arm_h,mm,20 mm,20,Snap clip arm height (from clip_z0),false
@@ -95,7 +95,10 @@ name_y,mm,-(enc_d/2) + name_front,-65,Name baseline Y,false
 label_z,mm,26 mm,26,"Socket labels baseline Z (above the seam, below the display bezel)",false
 mains_z,mm,sw_z + 13 mm,68,MAINS baseline Z (above the rocker bezel),false
 ban_x,mm,0 mm,0,Banana row centre X (0 = centred on the box),false
-label_h,mm,name_h * 0.8,3.7600000000000002,Front panel label capital height (80 % of the lid name),false
+label_h,mm,name_h * 0.8,3.76,Front panel label capital height (80 % of the lid name),false
+insert_ch,mm,1 mm,1,"Lead-in chamfer on the heat-set insert holes (PSU standoffs, LM2596 posts)",false
+fan_csk_d,mm,6.8 mm,6.8,"Fan screw countersink diameter on the lid top, 90 deg (M3 countersunk ISO 10642, head 6.72)",false
+fan_grille_r,mm,fan_s/2 - 3 mm,22,"Fan grille: slots end inside this circle (the fan blade area), so the outer slots are shorter",false
 name_text,text,cREATRON DPS XY-SK60X,,Name debossed into the lid,false
 label_neg,text,NEG,,Label above the black (negative) socket,false
 label_earth,text,EARTH,,Label above the green (earth) socket,false
