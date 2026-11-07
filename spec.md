@@ -128,8 +128,8 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 | 3 | **Mains rocker switch** KCD1-101: 15 × 21 flange, 12.9 × 18.8 × 13.2 body, 19.2 × 13 cut-out (datasheet) | `Rocker_Switch_KCD1-101.sc` (`Rocker_Switch_15x21.sc` and the older `Rocker_Switch.sc` are kept but unused) | Front, right of the display; switches the mains |
 | 4 | **Schurter KM00.1205.11**: C14 inlet with fuse holder and switch | `C14_Schurter_KM00-1205-11.sc` (from the vendor STEP) | Rear right, horizontal, its switch on the right seen from the front |
 | 5 | **ST-351B 4 mm banana sockets** × 3 (black / green / red, left to right). Own model: front cap Ø11.3 × 2.5 with a Ø6 nozzle through the panel, rear piece Ø11.3 × 4.4 (Ø6 bore) behind the panel, metal with Ø7 collar, Ø5.2 thread and solder lug | `Banana_4mm_Black/Red/Green.sc` (the vendor-STEP `backup/Banana_ST351B_*.sc` are kept but unused: their metal body is an open shell) | Front, under the display, row centred on the box (`ban_x` = 0), 25 mm pitch (`ban_pitch`) so the labels have room |
-| 6 | **Pelonis C5010H05BPLP1b-7** fan: 50 × 50 × 10, 5 V, 0.27 A, 13.6 CFM | from `oldTry/DC5010_7.stp` | Under the lid, centre (0.5, −2.5), blowing upward, over the transformer |
-| 7 | **LM2596HV buck module** (for the fan's 5 V) | from `oldTry/LM2596_DC-DC_CONVERTER.STEP` | Rear wall inside, left of the IEC inlet, vertical; input at the bottom, output at the top |
+| 6 | **Pelonis C5010H05BPLP1b-7** fan: 50 × 50 × 10, 5 V, 0.27 A, 13.6 CFM | from `stepFiles/DC5010_7.stp` | Under the lid, centre (0.5, −2.5), blowing upward, over the transformer |
+| 7 | **LM2596HV buck module** (for the fan's 5 V) | from `stepFiles/LM2596_DC-DC_CONVERTER.STEP` | Rear wall inside, left of the IEC inlet, vertical; input at the bottom, output at the top |
 
 ### 3.1 AC-DC2416 (measured 2026-10-31, heights above the top of the 1.6 mm PCB)
 | Property | Value |

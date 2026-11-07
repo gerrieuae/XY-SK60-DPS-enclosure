@@ -24,9 +24,10 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `Banana_4mm_Black/Red/Green.sc` | 4 mm banana sockets (ST-351B), own parametric model with the plastic split either side of the panel (used) |
 | `backup/Banana_ST351B_Black/Red/Green.sc` | Same sockets from the vendor STEP (not used: open metal shell) |
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
-| `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `oldTry/IEC-C14_*.stp`); not used |
+| `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `stepFiles/IEC-C14_*.stp`); not used |
 | `PSU_Enclosure.sc` | Older layout v2 (145 × 125 × 90), kept for reference |
-| `oldTry/` | Source STEP files (fan, LM2596, banana socket), fan datasheet values and the first scripted attempt |
+| `stepFiles/` | Vendor STEP sources (fan, LM2596, IEC C14 inlets, banana socket); already embedded in the `.sc` files, kept for re-import |
+| `oldTry/` | Fan datasheet values and the first scripted attempt (`try1.sc`); not used |
 
 ## Printing
 
