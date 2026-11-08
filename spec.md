@@ -94,7 +94,7 @@ Four standoffs like the PSU ones, to find the hole size that holds the M3 heat-s
 | Standoffs | 4 × Ø9 × 5 high (`boss_d`, `boss_h`) on a 56 × 24 × 2.5 plate, 14 mm apart |
 | Holes | Ø3.9, 4.0, 4.1 and 4.2, 5 deep (blind), each with the 1 mm lead-in chamfer (`insert_ch`); the size is recessed into the plate in front of each standoff |
 | Files | `insertTest.sc`, `insertTest.3mf` (flat on the bed) |
-| Use | Press an insert into each hole; pick the one that goes in flush, square and does not spin when you tighten an M3 screw. Set `psu_boss_hole` and `lm_boss_hole` in `PSU_Enclosure_120x85.sc` to that size (now 4.0). Change `ins_hole` / `hole_step` in `insertTest.sc` to test other sizes |
+| Use | Press an insert into each hole; pick the one that goes in flush, square and does not spin when you tighten an M3 screw. Set `psu_boss_hole` and `lm_boss_hole` in `PSU_Enclosure_120x85.sc` to that size (now 4.2, the size that tested best). Change `ins_hole` / `hole_step` in `insertTest.sc` to test other sizes |
 
 ### 2.3 Ventilation (floor in → lid out, fan assisted)
 All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 mm pitch (`vent_pitch`). No slot is longer than **20 mm** (`vent_len_max`); longer runs are split by **3 mm bridges** (`slot_bridge`). The slot counts follow the box: the lid and front floor fields are centred and get `floor((enc_w − 2·margin)/vent_pitch) + 1` slots, the side floor runs span `enc_d` minus their front and rear margins and are cut into `ceil(run / vent_len_max)` segments. The fan grille and the lid vent fields are placed from the fan (`fan_x`, `fan_y`, `fan_s`). The table below is at 120 × 150 × 85.
@@ -125,8 +125,8 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 ### 2.5 Internal mounts
 | Mount | Position | Size |
 |---|---|---|
-| PSU standoffs (4) | `psu_x` ± `psu_hole_dx`/2, `psu_y` ± `psu_hole_dy`/2 = (−27.35, −44.9), (28.35, −44.9), (−27.35, 60.7), (28.35, 60.7) | Ø9 × 5 high (`psu_boss_d`, `standoff_h`), Ø4 × 5 deep blind hole (`psu_boss_hole`) with a 1 mm lead-in chamfer (`insert_ch`) for M3 heat-set inserts (Ø5 × 4 long); M3 screws through the board's M4 holes, with washers |
-| LM2596 posts (2) | On the inner rear wall (Y = `enc_d/2 − wall`), at (`lm_x`, `lm_z`) = (−28, 35.87) and (+`lm_hole_dx`, +`lm_hole_dz`) = (−11, 69.05) | Square 9 × 9, 5 long (`lm_boss_w`, `lm_boss_h`), Ø4 × 5 deep blind hole (`lm_boss_hole`) with a 1 mm lead-in chamfer (`insert_ch`) for M3 heat-set inserts Ø5 × 4. A 45° gusset on the lid side runs 5 mm up the wall, so the posts print without support when the top is printed lid-down (§6) |
+| PSU standoffs (4) | `psu_x` ± `psu_hole_dx`/2, `psu_y` ± `psu_hole_dy`/2 = (−27.35, −44.9), (28.35, −44.9), (−27.35, 60.7), (28.35, 60.7) | Ø9 × 5 high (`psu_boss_d`, `standoff_h`), Ø4.2 × 5 deep blind hole (`psu_boss_hole`) with a 1 mm lead-in chamfer (`insert_ch`) for M3 heat-set inserts (Ø5 × 4 long); M3 screws through the board's M4 holes, with washers |
+| LM2596 posts (2) | On the inner rear wall (Y = `enc_d/2 − wall`), at (`lm_x`, `lm_z`) = (−28, 35.87) and (+`lm_hole_dx`, +`lm_hole_dz`) = (−11, 69.05) | Square 9 × 9, 5 long (`lm_boss_w`, `lm_boss_h`), Ø4.2 × 5 deep blind hole (`lm_boss_hole`) with a 1 mm lead-in chamfer (`insert_ch`) for M3 heat-set inserts Ø5 × 4. A 45° gusset on the lid side runs 5 mm up the wall, so the posts print without support when the top is printed lid-down (§6) |
 
 ---
 
@@ -233,8 +233,8 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | Group | Parameters | Rule |
 |---|---|---|
 | Feet | `foot_inset` 10, `foot_hole_d` 4 | Ø`foot_hole_d` at `enc_w/2 − foot_inset`, `enc_d/2 − foot_inset` |
-| PSU standoffs | `psu_x` 0.5, `psu_y` 7.9, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 9, `psu_boss_hole` 4 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
-| LM2596 posts | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_w` 9, `lm_boss_h` 5, `lm_boss_hole` 4 | Square posts with a 45° gusset toward the lid, rooted in the inner face of the rear wall, so they follow `enc_d` |
+| PSU standoffs | `psu_x` 0.5, `psu_y` 7.9, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 9, `psu_boss_hole` 4.2 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
+| LM2596 posts | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_w` 9, `lm_boss_h` 5, `lm_boss_hole` 4.2 | Square posts with a 45° gusset toward the lid, rooted in the inner face of the rear wall, so they follow `enc_d` |
 | Lid name | `name_text`, `name_h` 4.7, `name_front` 10, `name_depth` 0.3, `name_y` = `−enc_d/2 + name_front` | Centred text on the lid; `name_h` is not scaled with `enc_w`, so re-check the 60 % coverage after a width change |
 | Front labels | `label_neg`, `label_earth`, `label_pos`, `label_mains` (texts), `label_z` 26, `mains_z` = `sw_z + 13`, `label_h` = `name_h * 0.8` | 80 % of the lid name's height, same depth; the socket labels follow `ban_x` and `ban_pitch`, MAINS follows `sw_x` and `sw_z` |
 | Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `fan_csk_d` 6.8, `grille_l` = `fan_s − 10`, `fan_grille_r` = `fan_s/2 − 3` | Grille slots and screw holes follow the fan. The 9 slots are separate cuts (`Fan_Grille_1A`…`9B`), each as long as `grille_l` allows inside `fan_grille_r`; `grille_n` and `grille_seg` no longer drive them |
@@ -261,7 +261,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 3 | Banana sockets: own model (`Banana_4mm_*.sc`, 2026-11-05) with the two plastic pieces either side of the 2.5 mm wall, origin on the outer face (Y −75); no overlap with the wall, no import warnings. Nozzle measured Ø7.5, so the panel hole is Ø8 (`ban_hole_d`, 2026-11-07); the metal reaches 14 mm inside (Y −58.5), 0.4 mm short of the EMI filter box on the PSU (green socket) | ✅ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
 | 5 | Print the clip test box (`clipTest.sc`, §2.3a); tune the hook and arm for PETG or ASA | ⏳ |
-| 5a | Print the insert test (`insertTest.sc`, §2.3b); set `psu_boss_hole` / `lm_boss_hole` to the hole that holds best | ⏳ |
+| 5a | Print the insert test (`insertTest.sc`, §2.3b); set `psu_boss_hole` / `lm_boss_hole` to the hole that holds best: Ø4.2 (2026-11-08) | ✅ |
 | 6 | Use the XY-SK60 temperature probe (on the PSU heatsink?) and its fan output | ⏳ |
 | 7 | Layout, size, split, clips, vents, fan and fan supply | ✅ |
 
@@ -295,3 +295,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-07 | LM2596 posts for the same M3 heat-set inserts as the PSU: 9 × 9 (was 6 × 6), Ø4 × 5 deep hole (was Ø2.5 self-tapping); `Enclosure_Top.3mf` re-exported |
 | 2026-11-07 | 1 mm lead-in chamfers on the six insert holes (`insert_ch`). Fan screw holes countersunk Ø6.8 × 90° on the lid for M3 countersunk screws (`fan_csk_d`). Fan grille slots now end inside the fan circle (`fan_grille_r` 22): the outer slots are shorter, at least 3.3 mm from the countersinks |
 | 2026-11-08 | Insert test `insertTest.sc` / `insertTest.3mf`: four Ø9 × 5 standoffs with Ø3.9–4.2 holes and 1 mm chamfers, labelled |
+| 2026-11-08 | Insert test printed: Ø4.2 holds the inserts best. `psu_boss_hole` and `lm_boss_hole` 4 → 4.2 (the 1 mm chamfers follow); both 3MFs re-exported |

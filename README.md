@@ -7,6 +7,12 @@ Inside: an AC-DC2416 open-frame supply, an XY-SK60 controller with display, a fr
 
 The full design specification is in **[spec.md](spec.md)**: dimensions, positions, wiring, clearances and open items.
 
+![Assembled enclosure: XY-SK60 display, MAINS rocker and the NEG / EARTH / POS banana sockets on the front](pictures/DPS_iso.jpg)
+
+| Inside | Top half (lid down) | Bottom half |
+|---|---|---|
+| ![Inside: AC-DC2416 supply, fan under the lid, LM2596 on the rear wall, IEC inlet](pictures/DPS_inner.jpg) | ![Top half seen from below: front panel cut-outs, recessed labels, lid vents and the LM2596 posts](pictures/DPS_top.jpg) | ![Bottom half: PSU standoffs for heat-set inserts, floor vents, snap clips and the banana holes](pictures/DPS_bot.jpg) |
+
 ## Files
 
 | File | What it is |
@@ -26,6 +32,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
 | `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `stepFiles/IEC-C14_*.stp`); not used |
 | `backup/PSU_Enclosure2.sc`, `backup/PSU_Enclosure_110x80.sc` | Two early designs kept for history (not used). Other old versions (layout v2, 110 × 85, pre-parametric 120 × 85) are only in git history |
+| `pictures/` | Renders of the assembled enclosure, the inside and the two halves (shown above) |
 | `stepFiles/` | Vendor STEP sources (fan, LM2596, IEC C14 inlets, banana socket); already embedded in the `.sc` files, kept for re-import |
 
 ## Printing
@@ -36,7 +43,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `Enclosure_Top.3mf` | Upside down, lid on the bed |
 
 - **Test the clips first:** print `clipTest_Bottom.3mf` and `clipTest_Top.3mf` (a 40 × 50 × 28 box with the same lip, seam and 6 clips) in the same orientations. If the clips are too stiff or too loose, adjust `clip_hook`, `clip_arm_t` or the `clip_pocket_*` values in `clipTest.sc`, reprint, then copy the values into the main design. See [spec.md §2.3a](spec.md#23a-clip-test-box-cliptestsc).
-- **Test the insert holes:** print `insertTest.3mf` and press an M3 heat-set insert into each of the four holes (Ø3.9–4.2). Use the size that works for `psu_boss_hole` and `lm_boss_hole` (now 4.0). See [spec.md §2.3b](spec.md#23b-insert-test-inserttestsc).
+- **Test the insert holes:** print `insertTest.3mf` and press an M3 heat-set insert into each of the four holes (Ø3.9–4.2). Use the size that works for `psu_boss_hole` and `lm_boss_hole` (now 4.2, the size that tested best). See [spec.md §2.3b](spec.md#23b-insert-test-inserttestsc).
 - **Material:** PETG, or ASA for more heat margin.
 - **Settings:** 2.5 mm walls; no supports needed.
 

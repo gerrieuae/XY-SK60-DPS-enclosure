@@ -64,14 +64,14 @@ psu_y,mm,7.9 mm,7.9,PSU PCB centre Y (move the AC-DC2416 component to match),fal
 psu_hole_dx,mm,55.7 mm,55.7,PSU mounting hole pitch X,false
 psu_hole_dy,mm,105.6 mm,105.6,PSU mounting hole pitch Y,false
 psu_boss_d,mm,9 mm,9,PSU standoff diameter,false
-psu_boss_hole,mm,4 mm,4,PSU standoff hole for M3 heat-set insert (5 OD x 4 long),false
+psu_boss_hole,mm,4.2 mm,4.2,PSU standoff hole for M3 heat-set insert (5 OD x 4 long); 4.2 tested best (insertTest),false
 lm_x,mm,-28 mm,-28,LM2596 lower standoff X (rear wall inside),false
 lm_z,mm,35.87 mm,35.87,LM2596 lower standoff Z,false
 lm_hole_dx,mm,17 mm,17,LM2596 hole pitch X,false
 lm_hole_dz,mm,33.18 mm,33.18,LM2596 hole pitch Z,false
 lm_boss_w,mm,9 mm,9,"LM2596 post width (square section, 2.5 mm wall round the insert)",false
 lm_boss_h,mm,5 mm,5,LM2596 post length from the wall; the 45° gusset is as long again along the wall,false
-lm_boss_hole,mm,4 mm,4,"LM2596 post hole for M3 heat-set insert (5 OD x 4 long), 5 deep",false
+lm_boss_hole,mm,4.2 mm,4.2,"LM2596 post hole for M3 heat-set insert (5 OD x 4 long), 5 deep; 4.2 tested best (insertTest)",false
 clip_w,mm,6 mm,6,Snap clip arm width,false
 clip_arm_t,mm,1.2 mm,1.2,Snap clip arm thickness,false
 clip_arm_h,mm,20 mm,20,Snap clip arm height (from clip_z0),false
