@@ -8,16 +8,24 @@ corner_r,mm,5 mm,5,Outer vertical corner radius,false
 standoff_h,mm,5 mm,5,PSU standoff height,false
 ctl_x,mm,-9 mm,-9,Controller centre X,false
 ctl_z,mm,55.0 mm,55,Controller centre Z,false
-ctl_cut_w,mm,81.6 mm,81.6,Controller cutout W,false
-ctl_cut_h,mm,40.6 mm,40.6,Controller cutout H,false
+ctl_body_h,mm,40 mm,40,Controller body height (measured),false
+ctl_body_w,mm,81 mm,81,Controller body width (measured),false
+ctl_clr,mm,0.15 mm,0.15,Controller body clearance per side (0.3 was loose),false
+ctl_cut_w,mm,ctl_body_w + 2*ctl_clr,81.3,Controller cutout W,false
+ctl_cut_h,mm,ctl_body_h + 2*ctl_clr,40.3,Controller cutout H,false
 sw_x,mm,44.5 mm,44.5,Mains rocker switch centre X (right of display),false
 sw_z,mm,ctl_z,55,Mains rocker switch centre Z (aligned with display centre),false
 sw_cut_w,mm,13 mm,13,Rocker cutout W (KCD1-101 datasheet 19.2 x 13),false
 sw_cut_l,mm,19.2 mm,19.2,Rocker cutout H (KCD1-101 datasheet 19.2 x 13),false
 iec_x,mm,25 mm,25,IEC inlet centre X (rear right),false
 iec_z,mm,52 mm,52,IEC inlet centre Z,false
-iec_cut_w,mm,48.1 mm,48.1,IEC cutout W,false
-iec_cut_h,mm,28.1 mm,28.1,IEC cutout H,false
+iec_body_w,mm,47.5 mm,47.5,IEC inlet body width,false
+iec_body_h,mm,27.5 mm,27.5,IEC inlet body height,false
+iec_clr,mm,0.1 mm,0.1,IEC cut-out clearance per side (0.3 was loose),false
+iec_panel_t,mm,1 mm,1,Rear wall thickness at the four IEC latches (they are made for a 1.0 mm panel),false
+iec_pocket_m,mm,3 mm,3,Latch pockets reach this far beyond the IEC cut-out edge,false
+iec_cut_w,mm,iec_body_w + 2*iec_clr,47.7,IEC cutout W,false
+iec_cut_h,mm,iec_body_h + 2*iec_clr,27.7,IEC cutout H,false
 ban_z,mm,14 mm,14,Banana row centre Z,false
 ban_pitch,mm,25 mm,25,Banana spacing; leaves room for the NEG / EARTH / POS labels,false
 ban_hole_d,mm,8 mm,8,Banana panel hole (nozzle measured 7.5),false
@@ -72,14 +80,14 @@ lm_hole_dz,mm,33.18 mm,33.18,LM2596 hole pitch Z,false
 lm_boss_w,mm,9 mm,9,"LM2596 post width (square section, 2.5 mm wall round the insert)",false
 lm_boss_h,mm,5 mm,5,LM2596 post length from the wall; the 45° gusset is as long again along the wall,false
 lm_boss_hole,mm,4.2 mm,4.2,"LM2596 post hole for M3 heat-set insert (5 OD x 4 long), 5 deep; 4.2 tested best (insertTest)",false
-clip_w,mm,6 mm,6,Snap clip arm width,false
-clip_arm_t,mm,1.2 mm,1.2,Snap clip arm thickness,false
-clip_arm_h,mm,20 mm,20,Snap clip arm height (from clip_z0),false
-clip_root_h,mm,8 mm,8,Snap clip root height (bonded to the wall),false
-clip_z0,mm,split_z - 10 mm,13,Snap clip arm bottom Z,false
-clip_hook,mm,0.8 mm,0.8,Hook depth into the top's wall,false
+clip_w,mm,10 mm,10,Snap clip arm width,false
+clip_arm_t,mm,2.4 mm,2.4,Snap clip arm thickness,false
+clip_arm_h,mm,22 mm,22,Snap clip arm height (from clip_z0),false
+clip_root_h,mm,6 mm,6,Snap clip root height (bonded to the wall),false
+clip_z0,mm,split_z - 12 mm,11,Snap clip arm bottom Z (long arm: about 12 mm free to the hook),false
+clip_hook,mm,1 mm,1,Hook depth into the top's wall,false
 clip_hook_z,mm,split_z + 6.1 mm,29.1,Hook bottom Z (retention face),false
-clip_pocket_w,mm,7 mm,7,Hook pocket width in the top's wall,false
+clip_pocket_w,mm,clip_w + 1 mm,11,Hook pocket width in the top's wall,false
 clip_pocket_z,mm,split_z + 6.3 mm,29.3,Hook pocket bottom Z,false
 clip_pocket_h,mm,3.4 mm,3.4,Hook pocket height,false
 clip_y_front,mm,-(enc_d/2 - 11 mm),-64,Side clips: front pair Y centre,false
@@ -99,6 +107,17 @@ label_h,mm,name_h * 0.8,3.76,Front panel label capital height (80 % of the lid n
 insert_ch,mm,1 mm,1,"Lead-in chamfer on the heat-set insert holes (PSU standoffs, LM2596 posts)",false
 fan_csk_d,mm,6.8 mm,6.8,"Fan screw countersink diameter on the lid top, 90 deg (M3 countersunk ISO 10642, head 6.72)",false
 fan_grille_r,mm,fan_s/2 - 3 mm,22,"Fan grille: slots end inside this circle (the fan blade area), so the outer slots are shorter",false
+clip_y_mid,mm,-5 mm,-5,Side clips: middle pair Y centre,false
+clip_x_front2,mm,-clip_x_front,-44.5,Second front wall clip X centre (left of the banana sockets),false
+clip_x_rear2,mm,-45 mm,-45,Second rear wall clip X centre (left of the LM2596),false
+iec_latch_w1,mm,10 mm,10,"IEC wide latch pocket width (latch 8 mm), on the side toward the rocker (+X)",false
+iec_latch_x1,mm,16.3 mm,16.3,"IEC wide latch centre, X from the inlet centre (scaled from photo)",false
+iec_latch_w2,mm,8 mm,8,IEC narrow latch pocket width (latch 5.6 mm),false
+iec_latch_x2,mm,-11.3 mm,-11.3,"IEC narrow latch centre, X from the inlet centre (scaled from photo)",false
+lm2_x,mm,-52.4 mm,-52.4,Small buck module (23.5 x 43.5): lower hole X,false
+lm2_z,mm,40 mm,40,Small buck module: lower hole Z,false
+lm2_hole_dx,mm,15.8 mm,15.8,Small buck module: hole spacing across,false
+lm2_hole_dz,mm,30 mm,30,Small buck module: hole spacing along,false
 name_text,text,cREATRON DPS XY-SK60X,,Name debossed into the lid,false
 label_neg,text,NEG,,Label above the black (negative) socket,false
 label_earth,text,EARTH,,Label above the green (earth) socket,false

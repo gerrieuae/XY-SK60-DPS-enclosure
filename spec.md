@@ -57,33 +57,34 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 | Feature | Value |
 |---|---|
 | Split plane | Horizontal at **Z 23**, between the banana row and the display |
-| `Enclosure_Bottom` | Z 0–23, plus a lip to Z 26 and clip arms to Z 33 |
+| `Enclosure_Bottom` | Z 0–23, plus a lip to Z 26 and clip arms to Z 33 (10 clips, §2.2) |
 | `Enclosure_Top` | Z 23–85, including the lid, the front and rear panel cut-outs, and the fan mount |
 | Lip (on the bottom) | 1.2 thick × 3 high (`lip_t`, `lip_h`), on the inner half of the wall |
 | Groove (in the top) | 0.2 mm clearance (`lip_clr`) outside the lip and 0.3 above it, 3.4 deep |
 | Construction | No split or join features. `Copy_Bottom` copies the finished box; `Bottom_Cut_Above` (an oversize box) removes everything above `split_z + lip_h`, and `Bottom_Outer_Trim` (thin extrude of `Sk_Lip`, from `split_z` up) removes the outer half of the wall above `split_z`, which leaves the lip. On the original, `Top_Cut_Below` removes everything below `split_z` and `Groove` cuts the lip clearance. Every tool face lies far outside the body or inside material, so no boolean has coplanar faces; this rebuilds without warnings and the seam lies exactly at Z 23 (the earlier two-split version nudged the split tool by 4 µm / 2 µrad and warned). `Split_Plane` and `Lip_Top_Plane` are kept for reference only |
 | Seam | 0.6 mm chamfer on both outer edges, which forms a neat V-groove |
 
-### 2.2 Snap clips (6, no screws)
+### 2.2 Snap clips (10, no screws)
 | Property | Value |
 |---|---|
-| Positions | Left and right walls at Y −64 and Y +54 (`clip_y_front = −(enc_d/2 − 11)`, `clip_y_rear = enc_d/2 − 21`); front wall at X 44.5 (`clip_x_front = sw_x`, behind the rocker); rear wall at X 25 (`clip_x_rear = iec_x`, under the IEC inlet) |
-| Arm | `clip_arm_t` × `clip_w` = 1.2 × 6 mm, from `clip_z0 = split_z − 10` up 20 (`clip_arm_h`), about 12 mm free to flex, part of the bottom half |
-| Hook | Sticks 0.8 mm (`clip_hook`) into the wall from `clip_hook_z = split_z + 6.1`. Ramped top for lead-in; retention face about 70° |
-| Pocket | Blind pocket on the inside of the top's wall, `clip_pocket_w` = 7 wide, from `clip_pocket_z = split_z + 6.3`, 3.4 high (`clip_pocket_h`). Not visible from outside |
-| Release | Pull firmly, or press the arm through a vent slot |
+| Positions | Left and right walls at Y −64, −5 and +54 (`clip_y_front = −(enc_d/2 − 11)`, `clip_y_mid` = −5, `clip_y_rear = enc_d/2 − 21`); front wall at X 44.5 (`clip_x_front = sw_x`, behind the rocker) and X −44.5 (`clip_x_front2 = −clip_x_front`, left of the black socket); rear wall at X 25 (`clip_x_rear = iec_x`, under the IEC inlet) and X −45 (`clip_x_rear2`, left of the LM2596) |
+| Arm | `clip_arm_t` × `clip_w` = 2.4 × 10 mm, from `clip_z0 = split_z − 12` (Z 11) up 22 (`clip_arm_h`), rooted to the wall over the lowest 6 mm (`clip_root_h`), so about 12 mm is free to flex up to the hook. The bending strain on snapping is about 2.5 %, safe for PETG; a shorter arm this thick would crack |
+| Hook | Sticks 1.0 mm (`clip_hook`) into the wall from `clip_hook_z = split_z + 6.1`. Ramped top for lead-in; nearly flat retention face |
+| Pocket | Blind pocket on the inside of the top's wall, `clip_pocket_w` = `clip_w + 1` = 11 wide, `clip_hook + 0.2` = 1.2 deep into the wall (1.3 mm of wall left), from `clip_pocket_z = split_z + 6.3`, 3.4 high (`clip_pocket_h`). Not visible from outside |
+| Strength | Each clip holds about 4× more than the first version (1.2 × 6 arm, 0.8 hook), and there are 10 instead of 6. The first print let the bottom half (with the PSU) drop off when the top was lifted |
+| Release | Pull firmly; the clips are stiff, so work round the box |
 
 ### 2.3a Clip test box (`clipTest.sc`)
 
 ![Clip test box](pictures/clipTest.jpg)
 
-A small box to print before the full enclosure, to tune the clips for the filament. It is built from the same features as the main design (shell, `Copy_Bottom` / box cuts, lip, groove, seam chamfer and all 6 clips), with the components, cut-outs, vents, posts and labels left out.
+A small box to print before the full enclosure, to tune the clips for the filament. It is built from the same features as the main design (shell, `Copy_Bottom` / box cuts, lip, groove, seam chamfer and the 10 clips), with the components, cut-outs, vents, posts and labels left out.
 
 | Property | Value |
 |---|---|
 | Size | 40 × 50 × 28 (`enc_w`, `enc_d`, `enc_h`) |
-| Split | Z 13 (`split_z`), so `clip_z0` = 3 sits just above the 2.5 mm floor |
-| Clips | Same arm, root, hook and pocket as §2.2; front and rear clips centred (`clip_x_front` = `clip_x_rear` = 0), side pairs at Y −14 and +4 |
+| Split | Z 13 (`split_z`), so `clip_z0` = 1 starts inside the 2.5 mm floor; the root still ends 12 mm below the hook, as in the main design |
+| Clips | Same arm, root, hook and pocket as §2.2, 10 clips: three per side at Y −15, 0 and +15 (`clip_y_front`, `clip_y_mid`, `clip_y_rear`), two on the front and two on the rear wall at X ±8 |
 | Files | `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` (printed like the main halves, §6) |
 | Tuning | Change `clip_hook`, `clip_arm_t` or `clip_pocket_*` in `clipTest.sc`, reprint, then copy the values that work into `PSU_Enclosure_120x85.sc` |
 
@@ -115,14 +116,14 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 ### 2.4 Panel cut-outs
 | Feature | Panel | Centre (X, Z) | Size |
 |---|---|---|---|
-| XY-SK60 controller | Front | (−9, 55) | 81.6 × 40.6 rectangle, plain (press-fit tabs) |
+| XY-SK60 controller | Front | (−9, 55) | 81.3 × 40.3 rectangle, plain (press-fit tabs): measured body 81 × 40 (`ctl_body_w` × `ctl_body_h`) + 0.15 per side (`ctl_clr`; 0.3 was loose) |
 | Mains rocker switch | Front | (44.5, 55), height linked to the display (`sw_z = ctl_z`) | 19.2 × 13 (KCD1-101 datasheet) |
 | Banana − (black) | Front | (−25, 14) = (`ban_x − ban_pitch`, `ban_z`) | Ø8 |
 | Banana ⏚ (green) | Front | (0, 14) = (`ban_x`, `ban_z`) | Ø8 |
 | Banana + (red) | Front | (25, 14) = (`ban_x + ban_pitch`, `ban_z`) | Ø8 |
 | Socket labels | Front, top half | NEG, EARTH, POS centred over the sockets, baseline `label_z` = 26 (above the seam chamfer, below the display bezel at Z 32.5) | Arial Bold, capital height `label_h` = 0.8 × `name_h` = 3.76, recessed `name_depth` = 0.3 (`label_neg`, `label_earth`, `label_pos`) |
 | Rocker label | Front, top half | MAINS centred over the rocker, baseline `mains_z` = `sw_z + 13` = 68 (above the 15 × 21 bezel, which ends at Z 65.5) | as the socket labels (`label_mains`) |
-| IEC inlet | Rear | (25, 52) | 48.1 × 28.1 rectangle (`iec_cut_w` × `iec_cut_h`: 47.5 × 27.5 part + 0.3 per side) |
+| IEC inlet | Rear | (25, 52) | 47.7 × 27.7 rectangle (`iec_cut_w` × `iec_cut_h`: 47.5 × 27.5 part + 0.1 per side, `iec_clr`; 0.3 was loose). The KM00 snap latches are marked 1.0 and only lock on a 1.0 mm panel, so the wall is thinned from the inside to 1.0 mm (`iec_panel_t`) at the four latches only, keeping the full 2.5 mm wall elsewhere for the plug torque: pockets above and below the cut-out, reaching 3 mm beyond its edge (`iec_pocket_m`). Wide latches (8 mm, toward the rocker): pockets 10 wide (`iec_latch_w1`) centred +16.3 from the inlet centre (`iec_latch_x1`); narrow latches (5.6 mm): pockets 8 wide (`iec_latch_w2`) at −11.3 (`iec_latch_x2`). Latch positions scaled from a photo of the part (flange 50 mm). Lower pockets have a 45° lower edge, so the top half prints lid-down without support; the outside is unchanged (features `IEC_Latch_Pockets1/2`) |
 | Fan screws | Lid | fan centre ±20 | 4 × Ø3.4, 90° countersink Ø6.8 on the top (`fan_csk_d`) for M3 countersunk screws |
 | Name | Lid, outside | centred in X, baseline `name_front` = 10 mm behind the front wall | `name_text` = "cREATRON DPS XY-SK60X", Arial Bold, capital height `name_h` = 4.7 mm (about 85 mm wide, 71 % of `enc_w`), recessed `name_depth` = 0.3 mm (one first layer when printed lid-down). Reads correctly from the front |
 
@@ -131,6 +132,7 @@ All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 
 |---|---|---|
 | PSU standoffs (4) | `psu_x` ± `psu_hole_dx`/2, `psu_y` ± `psu_hole_dy`/2 = (−27.35, −44.9), (28.35, −44.9), (−27.35, 60.7), (28.35, 60.7) | Ø9 × 5 high (`psu_boss_d`, `standoff_h`), Ø4.2 × 5 deep blind hole (`psu_boss_hole`) with a 1 mm lead-in chamfer (`insert_ch`) for M3 heat-set inserts (Ø5 × 4 long); M3 screws through the board's M4 holes, with washers |
 | LM2596 posts (2) | On the inner rear wall (Y = `enc_d/2 − wall`), at (`lm_x`, `lm_z`) = (−28, 35.87) and (+`lm_hole_dx`, +`lm_hole_dz`) = (−11, 69.05) | Square 9 × 9, 5 long (`lm_boss_w`, `lm_boss_h`), Ø4.2 × 5 deep blind hole (`lm_boss_hole`) with a 1 mm lead-in chamfer (`insert_ch`) for M3 heat-set inserts Ø5 × 4. A 45° gusset on the lid side runs 5 mm up the wall, so the posts print without support when the top is printed lid-down (§6) |
+| Small buck module posts (2) | On the inner rear wall, for the smaller LM2596 board (23.5 × 43.5, holes 30 × 15.8 diagonal), beside the old posts so either board fits: (`lm2_x`, `lm2_z`) = (−52.4, 40) and (+`lm2_hole_dx`, +`lm2_hole_dz`) = (−36.6, 70); board area about X −56 to −33, Z 33 to 77 | Same as the LM2596 posts (`lm_boss_w`, `lm_boss_h`, `lm_boss_hole`, `insert_ch`) |
 
 ---
 
@@ -208,7 +210,7 @@ No parts overlap. The tightest spots:
 | `Enclosure_Bottom.3mf` | Upright (floor on the bed) | The clip arms then print vertically, along the layer direction, so they can flex |
 | `Enclosure_Top.3mf` | Upside down (lid on the bed) | The panel cut-outs bridge cleanly |
 
-- Print the clip test box (`clipTest_Top.3mf`, `clipTest_Bottom.3mf`, §2.3a) first, oriented as above. Tune the hook depth (0.8) or the arm thickness (1.2) for your filament.
+- Print the clip test box (`clipTest_Top.3mf`, `clipTest_Bottom.3mf`, §2.3a) first, oriented as above. Tune the hook depth (`clip_hook` 1.0) or the arm thickness (`clip_arm_t` 2.4) for your filament.
 - For long use near full load, ASA is the safer material.
 
 ---
@@ -224,8 +226,11 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | `enc_w` / `enc_d` / `enc_h` | 120 / 150 / 85 | Outer size. Everything in §7.2 follows these |
 | `wall`, `lid_t`, `corner_r` | 2.5, 2.5, 5 | Shell |
 | `ctl_x`, `ctl_z` | −9, 55 | Controller centre (the banana cut-outs follow `ctl_x`) |
+| `ctl_body_w`, `ctl_body_h`, `ctl_clr` | 81, 40, 0.15 | Controller body (measured) and clearance per side; `ctl_cut_w`/`ctl_cut_h` follow |
 | `sw_x`, `sw_z`, `sw_cut_w`, `sw_cut_l` | 44.5, = `ctl_z`, 13, 19.2 (KCD1-101 datasheet; add 0.1–0.2 if the printed hole is tight) | Rocker centre and cut-out |
 | `iec_x`, `iec_z` | 25, 52 | IEC inlet centre |
+| `iec_body_w`, `iec_body_h`, `iec_clr` | 47.5, 27.5, 0.1 | IEC body and clearance per side; `iec_cut_w`/`iec_cut_h` follow |
+| `iec_panel_t`, `iec_pocket_m`, `iec_latch_w1`, `iec_latch_x1`, `iec_latch_w2`, `iec_latch_x2` | 1, 3, 10, 16.3, 8, −11.3 | Rear wall thickness at the IEC latches (made for a 1.0 mm panel), pocket reach beyond the cut-out, and the wide / narrow latch pocket widths and X offsets from the inlet centre |
 | `ban_x`, `ban_z`, `ban_pitch`, `ban_hole_d` | 0, 14, 25, 8 | Banana row: centre X, height, spacing (the socket cut-outs and the NEG / EARTH / POS labels follow; move the socket components by hand after a change) |
 | `fan_x`, `fan_y`, `fan_hole_pitch` | 0.5, −2.5, 40 | Fan |
 | `slot_w`, `slot_bridge` | 2, 3 | Vents |
@@ -239,6 +244,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | Feet | `foot_inset` 10, `foot_hole_d` 4 | Ø`foot_hole_d` at `enc_w/2 − foot_inset`, `enc_d/2 − foot_inset` |
 | PSU standoffs | `psu_x` 0.5, `psu_y` 7.9, `psu_hole_dx` 55.7, `psu_hole_dy` 105.6, `psu_boss_d` 9, `psu_boss_hole` 4.2 | Four posts at the PSU centre ± half the hole pitch. Move the AC-DC2416 component to (`psu_x`, `psu_y`) when you change these |
 | LM2596 posts | `lm_x` −28, `lm_z` 35.87, `lm_hole_dx` 17, `lm_hole_dz` 33.18, `lm_boss_w` 9, `lm_boss_h` 5, `lm_boss_hole` 4.2 | Square posts with a 45° gusset toward the lid, rooted in the inner face of the rear wall, so they follow `enc_d` |
+| Small buck posts | `lm2_x` −52.4, `lm2_z` 40, `lm2_hole_dx` 15.8, `lm2_hole_dz` 30 (shares `lm_boss_*`, `insert_ch`) | Posts for the smaller module (23.5 × 43.5), lower hole left, upper hole right; mirror with a negative `lm2_hole_dx` if the board's holes run the other way |
 | Lid name | `name_text`, `name_h` 4.7, `name_front` 10, `name_depth` 0.3, `name_y` = `−enc_d/2 + name_front` | Centred text on the lid; `name_h` is not scaled with `enc_w`, so re-check the 60 % coverage after a width change |
 | Front labels | `label_neg`, `label_earth`, `label_pos`, `label_mains` (texts), `label_z` 26, `mains_z` = `sw_z + 13`, `label_h` = `name_h * 0.8` | 80 % of the lid name's height, same depth; the socket labels follow `ban_x` and `ban_pitch`, MAINS follows `sw_x` and `sw_z` |
 | Fan | `fan_x`, `fan_y`, `fan_s` 50, `fan_hole_pitch` 40, `fan_screw_d` 3.4, `fan_csk_d` 6.8, `grille_l` = `fan_s − 10`, `fan_grille_r` = `fan_s/2 − 3` | Grille slots and screw holes follow the fan. The 9 slots are separate cuts (`Fan_Grille_1A`…`9B`), each as long as `grille_l` allows inside `fan_grille_r`; `grille_n` and `grille_seg` no longer drive them |
@@ -246,7 +252,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | Floor vents, front | `fv_front_margin` 22, `fv_front_gap` 2, `fv_front_l` 7.5, `fv_front_n` | Centred field just inside the front wall |
 | Floor vents, sides | `fv_side_in` 11, `fv_side_clear` 2, `fv_right_n`, `fv_left_n`, `fv_side_rear_margin` 27.5, `fv_right_front_margin` 22.5, `fv_left_front_margin` 47.5, `fv_right_l`, `fv_left_l`, `fv_right_seg`, `fv_left_seg` | Runs along the side walls, split into ≤ `vent_len_max` segments. The slot count per side is what fits between the outer wall and the PSU standoff plus `fv_side_clear` (4 per side at 120 wide, 3 at 110, 2 at 100) |
 | Vents, common | `vent_pitch` 4, `vent_len_max` 20, `slot_w` 2, `slot_bridge` 3 | |
-| Snap clips | `clip_w` 6, `clip_arm_t` 1.2, `clip_arm_h` 20, `clip_root_h` 8, `clip_z0` = `split_z − 10`, `clip_hook` 0.8, `clip_hook_z` = `split_z + 6.1`, `clip_pocket_w` 7, `clip_pocket_z` = `split_z + 6.3`, `clip_pocket_h` 3.4, `clip_y_front` = `−(enc_d/2 − 11)`, `clip_y_rear` = `enc_d/2 − 21`, `clip_x_front` = `sw_x`, `clip_x_rear` = `iec_x` | All six clips, their hooks and pockets sit on the inner wall faces and follow the split. Each root is 0.1 mm wider on both sides and 0.1 mm lower than its arm, so the arm's faces lie inside the root and the join needs no boolean retry |
+| Snap clips | `clip_w` 10, `clip_arm_t` 2.4, `clip_arm_h` 22, `clip_root_h` 6, `clip_z0` = `split_z − 12`, `clip_hook` 1, `clip_hook_z` = `split_z + 6.1`, `clip_pocket_w` = `clip_w + 1`, `clip_pocket_z` = `split_z + 6.3`, `clip_pocket_h` 3.4, `clip_y_front` = `−(enc_d/2 − 11)`, `clip_y_mid` −5, `clip_y_rear` = `enc_d/2 − 21`, `clip_x_front` = `sw_x`, `clip_x_front2` = `−clip_x_front`, `clip_x_rear` = `iec_x`, `clip_x_rear2` −45 | All ten clips, their hooks and pockets sit on the inner wall faces and follow the split. Each root is 0.1 mm wider on both sides and 0.1 mm lower than its arm, so the arm's faces lie inside the root and the join needs no boolean retry |
 
 ### 7.3 What does **not** follow a size change
 
@@ -261,10 +267,11 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | # | Item | Status |
 |---|---|---|
 | 1 | Rocker switch: modelled from the KCD1-101 datasheet (cut-out 19.2 × 13, body 13.2 deep, 7.5 mm tabs). Flange thickness (2), rocker width (11) and clips are estimates; widen the hole 0.1–0.2 mm if a test print is tight | ✅ |
-| 2 | Schurter snap tabs sit 1.4–3.4 mm behind the flange; check that they lock on a 2.5 mm wall | ⏳ |
+| 2 | Schurter snap latches did not lock on the 2.5 mm wall (first build, 2026-11-08): they are marked 1.0 (panel thickness). Wall thinned to 1.0 mm at the four latches only, cut-out tightened to 0.1 per side; check on the next print (latch positions are scaled from a photo) | ⏳ |
 | 3 | Banana sockets: own model (`Banana_4mm_*.sc`, 2026-11-05) with the two plastic pieces either side of the 2.5 mm wall, origin on the outer face (Y −75); no overlap with the wall, no import warnings. Nozzle measured Ø7.5, so the panel hole is Ø8 (`ban_hole_d`, 2026-11-07); the metal reaches 14 mm inside (Y −58.5), 0.4 mm short of the EMI filter box on the PSU (green socket) | ✅ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
-| 5 | Print the clip test box (`clipTest.sc`, §2.3a); tune the hook and arm for PETG or ASA | ⏳ |
+| 5 | Print the clip test box (`clipTest.sc`, §2.3a) with the stronger 10-clip layout; tune the hook and arm for PETG or ASA | ⏳ |
+| 5b | Check the rear clip at X 25 (now 2.4 mm thick, 10 wide, Z 11–33) against the AC wires at the PSU's rear right; if they touch, move it with `clip_x_rear` | ⏳ |
 | 5a | Print the insert test (`insertTest.sc`, §2.3b); set `psu_boss_hole` / `lm_boss_hole` to the hole that holds best: Ø4.2 (2026-11-08) | ✅ |
 | 6 | Use the XY-SK60 temperature probe (on the PSU heatsink?) and its fan output | ⏳ |
 | 7 | Layout, size, split, clips, vents, fan and fan supply | ✅ |
@@ -300,3 +307,5 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-07 | 1 mm lead-in chamfers on the six insert holes (`insert_ch`). Fan screw holes countersunk Ø6.8 × 90° on the lid for M3 countersunk screws (`fan_csk_d`). Fan grille slots now end inside the fan circle (`fan_grille_r` 22): the outer slots are shorter, at least 3.3 mm from the countersinks |
 | 2026-11-08 | Insert test `insertTest.sc` / `insertTest.3mf`: four Ø9 × 5 standoffs with Ø3.9–4.2 holes and 1 mm chamfers, labelled |
 | 2026-11-08 | Insert test printed: Ø4.2 holds the inserts best. `psu_boss_hole` and `lm_boss_hole` 4 → 4.2 (the 1 mm chamfers follow); both 3MFs re-exported |
+| 2026-11-08 | After the first build: clips stronger and 10 instead of 6 (arm 2.4 × 10, was 1.2 × 6; hook 1.0, was 0.8; arm from Z 11 with 12 mm free length; new clips mid-side at Y −5, front X −44.5, rear X −45), as the bottom dropped off when the top was lifted. IEC: wall thinned to 1.0 mm round the inlet for its 1.0 mm-panel latches, cut-out clearance 0.3 → 0.1 per side. Display cut-out clearance 0.3 → 0.15 per side (81.3 × 40.3). `clipTest.sc` updated to the same clips |
+| 2026-11-08 | IEC: the all-round thinning replaced by four pockets at the latches only (10 wide at the 8 mm latches toward the rocker, 8 wide at the 5.6 mm ones), so the wall keeps its 2.5 mm against plug torque. Posts added for a smaller buck module (23.5 × 43.5, holes 30 × 15.8) beside the old LM2596 posts, which stay |

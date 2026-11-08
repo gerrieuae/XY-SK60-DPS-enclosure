@@ -3,7 +3,7 @@
 A 3D-printed enclosure for a 36 V / 5 A bench power supply, modelled in SolidCraft.
 Inside: an AC-DC2416 open-frame supply, an XY-SK60 controller with display, a front mains rocker switch, a Schurter C14 inlet with fuse and switch, three 4 mm banana sockets, and a 5 V fan powered by an LM2596HV buck module.
 
-**Size:** 120 × 150 × 85 mm. It prints in two halves that snap together with 6 clips and need no screws.
+**Size:** 120 × 150 × 85 mm. It prints in two halves that snap together with 10 clips and need no screws.
 
 The full design specification is in **[spec.md](spec.md)**: dimensions, positions, wiring, clearances and open items.
 
@@ -17,7 +17,7 @@ Test prints, to run before the full enclosure:
 
 | Clip test box (`clipTest.sc`) | Insert test (`insertTest.sc`) |
 |---|---|
-| ![Clip test box: 40 × 50 × 28 with the same lip, seam and 6 snap clips as the enclosure](pictures/clipTest.jpg) | ![Insert test: four standoffs with Ø3.9 / 4.0 / 4.1 / 4.2 holes and lead-in chamfers, sizes recessed in the plate](pictures/insertTest.jpg) |
+| ![Clip test box: 40 × 50 × 28 with the same lip and seam as the enclosure (picture shows the first 6-clip version)](pictures/clipTest.jpg) | ![Insert test: four standoffs with Ø3.9 / 4.0 / 4.1 / 4.2 holes and lead-in chamfers, sizes recessed in the plate](pictures/insertTest.jpg) |
 
 ## Files
 
@@ -27,7 +27,7 @@ Test prints, to run before the full enclosure:
 | `parameters.csv` | Parameter table exported from the main design (name, unit, expression, value, comment) |
 | `Enclosure_Top.3mf`, `Enclosure_Bottom.3mf` | Print-ready halves, exported from the main design |
 | `insertTest.sc`, `insertTest.3mf` | Four test standoffs with Ø3.9 / 4.0 / 4.1 / 4.2 holes (1 mm lead-in chamfer) for the M3 heat-set inserts used in the PSU and LM2596 mounts |
-| `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` | 40 × 50 × 28 test box with the same wall, lip, seam and 6 snap clips as the main design (split at Z 13); print it to tune the clips first |
+| `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` | 40 × 50 × 28 test box with the same wall, lip, seam and clips (10, the same size) as the main design (split at Z 13); print it to tune the clips first |
 | `AC-DC2416.sc` | AC-DC supply model (board, heatsinks, terminals, wiring keep-out spaces) |
 | `XY-SK60.sc` | Controller model (bezel, body, tabs, heatsink, rear connectors) |
 | `C14_Schurter_KM00-1205-11.sc` | IEC inlet, imported from the vendor STEP |
@@ -48,14 +48,16 @@ Test prints, to run before the full enclosure:
 | `Enclosure_Bottom.3mf` | Upright, so the clip arms print vertically and can flex |
 | `Enclosure_Top.3mf` | Upside down, lid on the bed |
 
-- **Test the clips first:** print `clipTest_Bottom.3mf` and `clipTest_Top.3mf` (a 40 × 50 × 28 box with the same lip, seam and 6 clips) in the same orientations. If the clips are too stiff or too loose, adjust `clip_hook`, `clip_arm_t` or the `clip_pocket_*` values in `clipTest.sc`, reprint, then copy the values into the main design. See [spec.md §2.3a](spec.md#23a-clip-test-box-cliptestsc).
+- **Test the clips first:** print `clipTest_Bottom.3mf` and `clipTest_Top.3mf` (a 40 × 50 × 28 box with the same lip, seam and 10 clips) in the same orientations. If the clips are too stiff or too loose, adjust `clip_hook`, `clip_arm_t` or the `clip_pocket_*` values in `clipTest.sc`, reprint, then copy the values into the main design. See [spec.md §2.3a](spec.md#23a-clip-test-box-cliptestsc).
 - **Test the insert holes:** print `insertTest.3mf` and press an M3 heat-set insert into each of the four holes (Ø3.9–4.2). Use the size that works for `psu_boss_hole` and `lm_boss_hole` (now 4.2, the size that tested best). See [spec.md §2.3b](spec.md#23b-insert-test-inserttestsc).
 - **Material:** PETG, or ASA for more heat margin.
 - **Settings:** 2.5 mm walls; no supports needed.
 
 ## Assembly notes
 
+- **Fan buck module:** posts for both the original LM2596 board (48 × 23) and the smaller one (23.5 × 43.5, holes 30 × 15.8) are on the rear wall; use whichever you have.
 - **Fan supply:** set the LM2596HV output to **5.0 V** before connecting the fan.
+- **IEC inlet:** the Schurter KM00 latches are made for a 1.0 mm panel, so the rear wall is thinned to 1.0 mm from the inside at the four latches only (the rest stays 2.5 mm against plug torque). Push the inlet in from the outside until the latches click.
 - **Mains switching:** the front rocker switches the mains, and the IEC module's switch on the back also works.
 - **Earth:** bond the green ⏚ banana to mains earth (PE).
 - **Wire slack:** wires cross the split at Z 23, so leave enough slack to open the case.
