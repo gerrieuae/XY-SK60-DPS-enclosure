@@ -85,6 +85,17 @@ A small box to print before the full enclosure, to tune the clips for the filame
 | Files | `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` (printed like the main halves, §6) |
 | Tuning | Change `clip_hook`, `clip_arm_t` or `clip_pocket_*` in `clipTest.sc`, reprint, then copy the values that work into `PSU_Enclosure_120x85.sc` |
 
+### 2.3b Insert test (`insertTest.sc`)
+
+Four standoffs like the PSU ones, to find the hole size that holds the M3 heat-set inserts (Ø5 × 4 long) best before printing the enclosure.
+
+| Property | Value |
+|---|---|
+| Standoffs | 4 × Ø9 × 5 high (`boss_d`, `boss_h`) on a 56 × 24 × 2.5 plate, 14 mm apart |
+| Holes | Ø3.9, 4.0, 4.1 and 4.2, 5 deep (blind), each with the 1 mm lead-in chamfer (`insert_ch`); the size is recessed into the plate in front of each standoff |
+| Files | `insertTest.sc`, `insertTest.3mf` (flat on the bed) |
+| Use | Press an insert into each hole; pick the one that goes in flush, square and does not spin when you tighten an M3 screw. Set `psu_boss_hole` and `lm_boss_hole` in `PSU_Enclosure_120x85.sc` to that size (now 4.0). Change `ins_hole` / `hole_step` in `insertTest.sc` to test other sizes |
+
 ### 2.3 Ventilation (floor in → lid out, fan assisted)
 All slots are **2 mm wide** (`slot_w`; a 2.5 mm test probe cannot enter) on a 4 mm pitch (`vent_pitch`). No slot is longer than **20 mm** (`vent_len_max`); longer runs are split by **3 mm bridges** (`slot_bridge`). The slot counts follow the box: the lid and front floor fields are centred and get `floor((enc_w − 2·margin)/vent_pitch) + 1` slots, the side floor runs span `enc_d` minus their front and rear margins and are cut into `ceil(run / vent_len_max)` segments. The fan grille and the lid vent fields are placed from the fan (`fan_x`, `fan_y`, `fan_s`). The table below is at 120 × 150 × 85.
 
@@ -250,6 +261,7 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 3 | Banana sockets: own model (`Banana_4mm_*.sc`, 2026-11-05) with the two plastic pieces either side of the 2.5 mm wall, origin on the outer face (Y −75); no overlap with the wall, no import warnings. Nozzle measured Ø7.5, so the panel hole is Ø8 (`ban_hole_d`, 2026-11-07); the metal reaches 14 mm inside (Y −58.5), 0.4 mm short of the EMI filter box on the PSU (green socket) | ✅ |
 | 4 | Confirm the bulk capacitor is no taller than 27 mm (0.9 mm gap to the controller) | ⏳ |
 | 5 | Print the clip test box (`clipTest.sc`, §2.3a); tune the hook and arm for PETG or ASA | ⏳ |
+| 5a | Print the insert test (`insertTest.sc`, §2.3b); set `psu_boss_hole` / `lm_boss_hole` to the hole that holds best | ⏳ |
 | 6 | Use the XY-SK60 temperature probe (on the PSU heatsink?) and its fan output | ⏳ |
 | 7 | Layout, size, split, clips, vents, fan and fan supply | ✅ |
 
@@ -282,3 +294,4 @@ The enclosure is driven by the parameters below (SolidCraft → Parameters). The
 | 2026-11-07 | `AC-DC2416.sc`: the DC wiring keep-out in front of the DC terminal has its own length `dc_wire_clear` = 12 mm (was `wire_clear` 20, still used for the AC side). It now ends at Y −61.5 and still overlaps the green socket's metal tip (Y −58.5) by 3 mm; the real parts are 9 mm apart. All component links now point to files in the project folder |
 | 2026-11-07 | LM2596 posts for the same M3 heat-set inserts as the PSU: 9 × 9 (was 6 × 6), Ø4 × 5 deep hole (was Ø2.5 self-tapping); `Enclosure_Top.3mf` re-exported |
 | 2026-11-07 | 1 mm lead-in chamfers on the six insert holes (`insert_ch`). Fan screw holes countersunk Ø6.8 × 90° on the lid for M3 countersunk screws (`fan_csk_d`). Fan grille slots now end inside the fan circle (`fan_grille_r` 22): the outer slots are shorter, at least 3.3 mm from the countersinks |
+| 2026-11-08 | Insert test `insertTest.sc` / `insertTest.3mf`: four Ø9 × 5 standoffs with Ø3.9–4.2 holes and 1 mm chamfers, labelled |

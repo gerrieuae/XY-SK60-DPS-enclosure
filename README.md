@@ -14,6 +14,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `PSU_Enclosure_120x85.sc` | **Main design.** Enclosure plus all components, parametric |
 | `parameters.csv` | Parameter table exported from the main design (name, unit, expression, value, comment) |
 | `Enclosure_Top.3mf`, `Enclosure_Bottom.3mf` | Print-ready halves, exported from the main design |
+| `insertTest.sc`, `insertTest.3mf` | Four test standoffs with Ø3.9 / 4.0 / 4.1 / 4.2 holes (1 mm lead-in chamfer) for the M3 heat-set inserts used in the PSU and LM2596 mounts |
 | `clipTest.sc`, `clipTest_Top.3mf`, `clipTest_Bottom.3mf` | 40 × 50 × 28 test box with the same wall, lip, seam and 6 snap clips as the main design (split at Z 13); print it to tune the clips first |
 | `AC-DC2416.sc` | AC-DC supply model (board, heatsinks, terminals, wiring keep-out spaces) |
 | `XY-SK60.sc` | Controller model (bezel, body, tabs, heatsink, rear connectors) |
@@ -35,6 +36,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `Enclosure_Top.3mf` | Upside down, lid on the bed |
 
 - **Test the clips first:** print `clipTest_Bottom.3mf` and `clipTest_Top.3mf` (a 40 × 50 × 28 box with the same lip, seam and 6 clips) in the same orientations. If the clips are too stiff or too loose, adjust `clip_hook`, `clip_arm_t` or the `clip_pocket_*` values in `clipTest.sc`, reprint, then copy the values into the main design. See [spec.md §2.3a](spec.md#23a-clip-test-box-cliptestsc).
+- **Test the insert holes:** print `insertTest.3mf` and press an M3 heat-set insert into each of the four holes (Ø3.9–4.2). Use the size that works for `psu_boss_hole` and `lm_boss_hole` (now 4.0). See [spec.md §2.3b](spec.md#23b-insert-test-inserttestsc).
 - **Material:** PETG, or ASA for more heat margin.
 - **Settings:** 2.5 mm walls; no supports needed.
 
