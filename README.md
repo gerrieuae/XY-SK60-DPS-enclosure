@@ -13,6 +13,12 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 |---|---|---|
 | ![Inside: AC-DC2416 supply, fan under the lid, LM2596 on the rear wall, IEC inlet](pictures/DPS_inner.jpg) | ![Top half seen from below: front panel cut-outs, recessed labels, lid vents and the LM2596 posts](pictures/DPS_top.jpg) | ![Bottom half: PSU standoffs for heat-set inserts, floor vents, snap clips and the banana holes](pictures/DPS_bot.jpg) |
 
+Test prints, to run before the full enclosure:
+
+| Clip test box (`clipTest.sc`) | Insert test (`insertTest.sc`) |
+|---|---|
+| ![Clip test box: 40 × 50 × 28 with the same lip, seam and 6 snap clips as the enclosure](pictures/clipTest.jpg) | ![Insert test: four standoffs with Ø3.9 / 4.0 / 4.1 / 4.2 holes and lead-in chamfers, sizes recessed in the plate](pictures/insertTest.jpg) |
+
 ## Files
 
 | File | What it is |
@@ -32,7 +38,7 @@ The full design specification is in **[spec.md](spec.md)**: dimensions, position
 | `iec-v14-wide.sc` | Earlier sketch of a Qualtek 764-00/002 inlet (not used) |
 | `iec-c14-17361.sc`, `iec-c14-17362.sc`, `iec-c14-352181.sc` | Alternative IEC C14 inlets imported from vendor STEP files (sources in `stepFiles/IEC-C14_*.stp`); not used |
 | `backup/PSU_Enclosure2.sc`, `backup/PSU_Enclosure_110x80.sc` | Two early designs kept for history (not used). Other old versions (layout v2, 110 × 85, pre-parametric 120 × 85) are only in git history |
-| `pictures/` | Renders of the assembled enclosure, the inside and the two halves (shown above) |
+| `pictures/` | Renders of the assembled enclosure, the inside, the two halves and the two test prints (shown above) |
 | `stepFiles/` | Vendor STEP sources (fan, LM2596, IEC C14 inlets, banana socket); already embedded in the `.sc` files, kept for re-import |
 
 ## Printing

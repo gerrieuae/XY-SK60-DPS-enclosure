@@ -75,6 +75,8 @@ Origin at the centre of the outer bottom face. **X** = width (+X is right, seen 
 
 ### 2.3a Clip test box (`clipTest.sc`)
 
+![Clip test box](pictures/clipTest.jpg)
+
 A small box to print before the full enclosure, to tune the clips for the filament. It is built from the same features as the main design (shell, `Copy_Bottom` / box cuts, lip, groove, seam chamfer and all 6 clips), with the components, cut-outs, vents, posts and labels left out.
 
 | Property | Value |
@@ -86,6 +88,8 @@ A small box to print before the full enclosure, to tune the clips for the filame
 | Tuning | Change `clip_hook`, `clip_arm_t` or `clip_pocket_*` in `clipTest.sc`, reprint, then copy the values that work into `PSU_Enclosure_120x85.sc` |
 
 ### 2.3b Insert test (`insertTest.sc`)
+
+![Insert test](pictures/insertTest.jpg)
 
 Four standoffs like the PSU ones, to find the hole size that holds the M3 heat-set inserts (Ø5 × 4 long) best before printing the enclosure.
 
